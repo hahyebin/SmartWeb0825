@@ -1,0 +1,19 @@
+-- 외우기 - 정리 ( -- 는 oracle 주석)
+-- 모두 관리자로 접속한 뒤 처리해야함.
+-- CONN SYSTEM/123456;
+
+--1. 사용자 추가 
+--CREATE USER 사용자 IDENTIFIED BY 비번;
+--
+--
+--2. 권한 부여 
+--GRANT CONNECT, RESOURCE, DBA TO 사용자;
+--GRANT DBA TO 사용자
+--
+--3. 사용자제거
+--CONN SYSTEM/123456;
+--DROP USER 사용자 (CASCADE);  -- 사용자가 테이블 등 데이터를 가진 경우 
+--
+--4. 권한 해제 
+--REVOKE CONNECT, RESOURCE FROM 사용자;
+--REVOKE DBA FROM 사용자;
