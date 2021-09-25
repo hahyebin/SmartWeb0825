@@ -1,0 +1,144 @@
+
+	
+<< 데이터베이스 구조 >>
+
+ 
+
+1. 사원테이블
+
+   employee (emp_id, emp_name, salary, dept_id)
+
+2. 부서테이블
+
+   department (dept_id, dept_name)
+
+   1) employee 테이블의 기본키는 emp_id 이다.
+
+   2) department 테이블의 기본키는 dept_id 이다.
+
+   3) employee 테이블의 dept_id 는 department 테이블의 dept_id 를 참조하는 외래키이다.
+
+ 
+
+<주의> CREATE TABLE 작업을 수행하지 말고, 아래 2문제만 해결하시오.
+
+ 
+
+1. 가장 높은 연봉(salary)을 받는 사원의 부서 이름(dept_name)을 조회하는 쿼리문을 작성하시오.
+
+2. 부서 이름(dept_name)이 '총무부'인 사원들의 사원번호(emp_id), 사원명(emp_name), 연봉(salary)을 조회하는 쿼리문을 작성하시오.
+
+
+
+select d.department_name
+  from  departments d, employees e
+ WHERE  d.department_id = e.department_id
+ and salary = (SELECT  max(salary) from employees);
+
+
+답 낸거
+ select d.dept_name
+ from  department d, employee e
+ where d.dept_id = e.dept_id
+ and salary = (select max(salary) from employee);
+   
+
+
+
+-- 총무부인 
+
+ SELECT e.salary, e.first_name
+ FROM departments d, employees e
+ WHERE d.department_id = e.department_id
+ AND d.department_name = 'Marketing';
+
+답 낸거 
+ SELECT e.emp_id, e.emp_name, e.salary
+ FROM department d, employee e
+ WHERE d.dept_id = e.dept_id
+ AND d.dept_name = '총무부';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+drop table board;
+create table board( 
+    board_no number,
+    board_title varchar2(1000 byte) not null,
+    board_content varchar2(4000 byte),
+    board_hit number,
+    board_date date,
+    Primary key(board_no)
+    );
+
+--2-1)
+CREATE SEQUENCE board_seq;    
+
+--2-2)
+insert into board values(board_seq.nextval, '공지사항','이번 주 금요일까지 공사가 진행됩니다.', 0, TO_DATE(SYSDATE));
+insert into board values(board_seq.nextval, '질문','등급을 올리려면 어떻게 해야 하나요?', 0, TO_DATE(SYSDATE));
+insert into board values(board_seq.nextval, '필독','반드시 마스크를 착용하시고 엘레베이터에 탑승하시길 바랍니다.', 0, TO_DATE(SYSDATE));
+--3
+update board set board_title = '문의' WHERE board_title = '질문';
+
+--4.
+delete from board where board_no = 1;
+
+-- 5.
+
+SELECT board_no, board_title, board_hit
+
+  FROM board;
+
+-- 6.
+select  DISTINCT board_title from board;
+
+SELECT DISTINCT board_title FROM board;
+
+-- 7. 
+UPDATE board SET board_hit = board_hit+2 WHERE board_no = 2;
+
+
+-- 8.
+SELECT board_title, board_hit FROM board ORDER BY board_date DESC;
+
+
+-- 9.
+COMMIT;
+
+
+-- 10. 
+ROLLBACK;
+
+
+-- 11.
+SELECT TABLE_NAME FROM USER_TABLES;
+
+
+
+
+--12.
+DESC USER_CONSTRAINTS;
+
+
+
+
+
+
+
