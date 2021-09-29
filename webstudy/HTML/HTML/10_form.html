@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>제목</title>
+    </head>
+    <body>
+
+        <!--
+            1. <form></form>
+                1) action 속성 : form에 입력된 모든 정보를 보내는 경로
+                                 action 경로로 정보를 보내기 위해서는 submit이 필요
+                2) method 속성 : form에 입력된 모든 정보를 보내는 방식
+                    (1) get 방식 
+                        - 디폴트  
+                        - 보내는 정보가 헤더(header)에 포함
+                        - 보내는 정보가 URL에 노출 (보안 취약)
+                        - 빠름 
+                        - 용도 : 검색
+                    (2) post 방식
+                        - 보내는 정보가 바디(body)에 포함
+                        - 보내는 정보가 노출 되지 않음(보안 유지)
+                        - 느림
+                        - 용도 : 로그인, 회원가입 등
+                3) enctype 속성
+                    (1) 파일 첨부에서 사용
+                    (2) 파일 첨부하는 form
+                        <form enctype="multipart/form-data" method="post">
+            2. name 속성 
+                1) <form> 태그나 <form> 태그의 하위 태그에서 사용
+                2) 보낸 정보는 받는 쪽(서버 측)에서 name 속성으로 식별 
+            3. value 속성
+                1) 보내는 정보, 보내는 실제 데이터
+                2) value 속성 값을 작성해서 보내면 사용자 입력을 대체
+                3) 사용자가 입력한 값이 value 속성으로 등록 
+                * (사용자가 입력할 때 value 속성으로 보내지기 때문에 적지 않지만, hidden일때는 사용자가 적지못하기 때문에 value로 명시)
+                * (자바에 저장할 변수 이름)
+            -->
+
+        <h1>&lt;input&gt; 태그</h1>
+        <form action="01_overview.html">
+            <input type="text" name="a" placeholder="일반 텍스트용" ><br>
+            <input type="password" name="b" placeholder="비밀번호용"><br>
+            <input type="number" name="c" placeholder="숫자용"><br>
+            <input type="hidden" name="d" value="숨겨서보내는값"><br>
+            <button type="submit">SUBMIT</button>
+        </form>
+        <hr>
+        <h1>선택 태그</h1>
+          <!-- checkbox, radio는 사용자 편의를 위해서 label 사용하기(id와 블록을 활용한 label 둘다 알기) -->
+          <!-- checkbox, name이 통일되어야 한다. 
+               중복선택 가능
+               서버에서 배열로 받는다.
+               value 값을 주지 않으면 서버가 어떤 요소인지 모르기 때문에 value가 꼭 필요하다.-->
+            <input type="checkbox" name="a" value="game" id="id_game">
+            <label for="id_game">게임</label>
+            &nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="a" value="movie"  id="id_movie">
+            <label for="id_movie">영화</label>
+            <br>
+            <!-- radio, name이 통일되어야 한다. 
+                 한개만 선택 가능 (name이 같으면 알아서 선택한 값으로 자동변경)
+                 한개만 받기 때문에 서버측에서는 변수로 받는다. (대부분 radio 빼고 form의 name이 같으면 배열로 받음)-->
+            <label><input type="radio" name="b" value="male">남자</label>
+            &nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="b" value="female">여자</label>
+            &nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="b" value="none" checked="checked">선택 안 함</label>        
+        </form>
+        <br><hr>
+        <!---->
+        <h1>목록 태그</h1>
+        <form>
+            <!--하나만 선택 : 변수 처리(String a)-->
+            <select name="a">
+                <option value="02">02</option>
+                <option value="031">031</option>
+                <option value="032">032</option>
+            </select>
+            <br>
+            <!--여러 개 선택 : 배열 처리(String[] b)-->
+            <select name="b" multiple>
+                <option value="1">서울</option>
+                <option value="2">경기</option>
+                <option value="3">인천</option>
+            </select>
+            <br>
+            <!-- 선택(datalist) + 입력(input) : 콤보 -->
+            <input list="domains" type="text" name="domain" placeholder="도메인 입력 및 선택">
+            <datalist id="domains">
+                <option value="gmail.com"/>
+                <option value="kakao.com"/>
+                <option value="naver.com"/>
+            </datalist>    
+        </form>
+        <hr>
+            <h1>단추</h1>
+            <form action="01_overview.html">
+                <!-- 서브밋-->
+                <!-- submit : button vs input 
+                              button : 하위태그 가능 
+                              input : 동일한 간격 가능 --->
+                <button type="submit">전송</button>
+                <br>
+                <button>전송</button>
+                <br>
+                <input type="submit" value="전송">
+                <br>
+                <!-- 취소 -->
+                <input type="text">
+                <input type="reset" value="취소">
+                <br>
+                <!-- 그냥 버튼 : 자바스크립트 실행을 위해서 -->
+                <input type="button" value="일반" onclick="alert('눌렀어?')">
+            </form>
+            <hr>
+            <h1>파일 첨부</h1>
+            <!-- 첨부 파일의 이름은 name으로 -->
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="filename">
+            </form>
+            <hr>
+            <h1>기타</h1>
+            <form>
+                <fieldset>
+                    <legend>성별</legend>
+                   <label><input type="radio" name="gender" value="m">남자</label>
+                   <label><input type="radio" name="gender" value="f">여자</label>
+                </fieldset>
+                <!--db에서 VARCHAR2 = 4000까지 허용하기 때문에 최대 4000가능 -->
+                <textarea rows="20" cols="200" name="a"></textarea>
+            </form>
+            <br><br><hr>
+
+            <h1>연습문제1</h1>
+            <form action="#">
+                <input type="text" name="id" placeholder="example@naver.com">
+                <input type="password" name="pwd" placeholder="비밀번호">
+                <input type="submit" value="로그인">
+            </form>
+            <br>
+
+            <h1>연습문제2</h1>
+            <form action="#">
+                <table>
+                    <tr>
+                        <td><input type="text" name="id" placeholder="아이디"></td>
+                        <td rowspan="2"> <input type="submit" value="로그인" style="height: 50px"> </td>
+                    </tr>
+                    <tr>
+                        <td>  <input type="password" name="pwd" placeholder="비밀번호"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <br>
+            <h1>연습문제3</h1>
+            <form action="#">
+                <table>
+                        <caption><b>개인 정보 작성</caption>
+                    <tbody>
+                        <tr>
+                            <td>이름</td>
+                            <td><input type="text"><br></td>
+                        </tr>
+                        <tr>
+                            <td>메일 주소</td>
+                            <td><input type="text"><br></td>
+                        </tr>
+                        <tr>
+                            <td>연락처</td>
+                            <td><input type="text"><br></td>
+                        </tr>
+                        <tr>
+                            <td>블로그/홈페이지</td>
+                            <td><input type="text"><br></td>
+                        </tr>
+                    </tbody>
+                        <caption style="caption-side: bottom;">    
+                            <button type="submit">제출하기</button>
+                            <input type="reset" value="다시작성">
+                        </caption>
+                </table>
+            </form>
+            <br><br>
+              <h1>연습문제4(네이버 회원가입)</h1>
+            <img src="../images/naver.png" width="100px">
+        <br>
+        <form action="#" method="POST">
+            <label for="id"><b>아이디</b></label><br>
+            <input id="id" type="text" name="id" ><br><br>
+
+            <label for="pwd"><b>비밀번호</b></label><br>
+            <input id="pwd" type="password" name="pwd"><br><br>
+
+            <label for="pwd2"><b>비밀번호 재확인</b></label><br>
+            <input id="pwd2" type="password" > <!-- 2번째 비밀번호는 굳이 서버로 보낼 필요없음-->
+            <br><br>
+
+            <label for="name"><b>이름</b></label><br>
+            <input id="name" name="name" type="text">
+            <br><br>
+
+            <label  for="year"><b>생년월일</b></label><br>
+            <input  id="year" name="year" type="text" placeholder="년(4자)" style="width: 50px;">
+            <select name="month">
+                <option value="월">월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <input style="width: 50px;" name="day" type="text" placeholder="일"><br><br>
+
+            <label for="id_gender"><b>성별</b></label><br>
+            <select id="id_gender" name="gender" >
+                <option value="genders">성별</option>
+                <option value="female">여자</option>
+                <option value="male">남자</option>
+            </select><br><br>
+
+            <label for="email"><b>본인 확인 이메일<span style="color: lightgray;font-size: 12px;">(선택)</span></b></label><br>
+            <input id="email" name="email" type="text" placeholder="선택입력" ><br><br>
+
+            <label  for="id_phone"><b>휴대전화</b></label><br>
+            <select name="countryNo">
+                <option value="kor">대한민국 +82</option>
+                <option value="jp">일본 +81</option>
+                <option value="uk">영국 +44</option>
+            </select><br>
+            <input id="id_phone" name="phone" type="text" placeholder="전화번호 입력" style="width: 70px;"  >
+            <button type="button">인증번호 받기</button><br>
+            <input type="text"  id="authcode" name="authcode" placeholder="인증번호를 입력하세요" ><br><br>
+
+            <button>가입하기</button>
+        </form>
+
+
+    </body>
+</html>
