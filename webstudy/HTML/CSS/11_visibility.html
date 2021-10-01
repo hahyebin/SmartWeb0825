@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a img{
+            width: 200px;
+           /* visibility: hidden; /* 보이지 않는 상태에서 hover가 적용되지 않는다.*/
+        }
+     
+        /* 1. 화면에 보이지 않도록 만드는 법 */
+        .a img:nth-of-type(2),  .a img[src$="dog.jpg"]{
+            visibility: hidden;
+           /* visible, hidden(보이지 않지만 자리에는 있음) */
+        }
+
+        /* 보이는 이미지 선택하면 숨김 처리 */
+        .b img{
+            width:200px;
+        }
+        .b img:hover{
+            visibility: hidden;
+        }
+        
+        /* 안 보이는 이미지 선택하면  보이기 */
+        /* 
+            안 보이는 img는 hover가 불가능하기 때문에 
+            img의 부모 span을 hover하도록 구성
+        */
+        .c > span > img{
+            width: 200px;
+            visibility: hidden;
+        }
+        .c span:hover > img {
+            visibility: visible;
+        }
+      
+
+        .answer{
+            visibility: hidden;
+        }
+        .answer_view:hover + .answer {
+            visibility: visible;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="a">
+        <img src="../images/cat.jpg">
+        <img src="../images/dog.jpg">
+        <img src="../images/lion.jpg">
+    </div>
+    <div class="b">
+        <img src="../images/cat.jpg">
+        <img src="../images/dog.jpg">
+        <img src="../images/lion.jpg">
+    </div>
+    <div class="c">
+        <span><img src="../images/cat.jpg"></span>
+        <span><img src="../images/dog.jpg"></span> 
+        <span><img src="../images/lion.jpg"></span>
+    </div>
+    <hr>
+  
+    <h3>다음 중 블록레벨이 아닌 것은?</h3>
+    <ol>
+        <li>&lt;div&gt;</li>
+        <li>&lt;span&gt;</li>
+        <li>&lt;ul&gt;</li>
+        <li>&lt;p&gt;</li>
+    </ol>
+
+
+  
+     정답 : [ <span class="answer">2</span> ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="answer_view">정답보기</span>
+<br>
+    <span class="answer_view">정답보기</span>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     정답 : [ <span class="answer">2</span> ]
+    
+    <!-- 인접형제를 위해 정답보기와 정답번호의 위치를 바꾼다.
+      <span class="answer_view">정답보기</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      정답 : [ <span class="answer">2</span> ]
+     -->
+
+
+
+</body>
+</html>
