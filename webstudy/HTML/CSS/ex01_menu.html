@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-    
+        /* menu1 */
         .menu1 > ul {
             list-style-type: none;
             padding: 0;
             border-top: 1px solid gray;
-            border-bottom: 1px solid gray;
+            border-bottom: 2px solid gray;
             display: flex;
             justify-content: center;
         }
@@ -21,7 +21,6 @@
             height: 40px;
             line-height: 40px;
         }
-
         .menu1 > ul > li > a{
             display: block;
             height: 100%;
@@ -30,8 +29,36 @@
             color: limegreen;
         }
         .menu1 > ul > li > a:hover {
-            text-decoration: underline;
+           background-color: lightgrey;
         }
+
+        /* menu2 */
+        .menu2 {
+            border-bottom: 1px solid grey;
+        }
+        .menu2 > ul {
+            overflow: hidden;
+            list-style-type: none;
+            padding: 0;
+            width: 600px;   /*margin이 있어야 양쪽 여백이 존재하기 때문에 AUTO가 적용됨!*/
+            margin:0 auto;
+        }
+        .menu2 > ul > li {
+            float: left;
+          
+        }
+        /*flex에선 li의 크기를 늘려 그에 맞게 a를 지정 , float에선 a의 크기를 늘려 링크범위를 늘림*/
+        .menu2 > ul > li > a {
+            display: block;
+            padding: 10px 30px;   /*패딩으로 크기를 잡으면 메뉴의 크기가 서로 다름 텍스트만큼 잡으니까 다름*/
+            color: black;
+            text-decoration: none;
+        }
+        .menu2 > ul > li > a:hover {
+            color: red;
+            border-bottom: 3px solid red;
+        }
+        
 
     </style>
 </head>
@@ -43,8 +70,20 @@
             <li><a href="#">블로그</a></li>
             <li><a href="#">지식iN</a></li>
             <li><a href="#">쇼핑</a></li>
+            <li><a href="#">Pay</a></li>
         </ul>
     </div>
+    <div class="menu2">
+        <ul>
+            <li><a href="#">메일</a></li>
+            <li><a href="#">카페</a></li>
+            <li><a href="#">블로그</a></li>
+            <li><a href="#">지식iN</a></li>
+            <li><a href="#">쇼핑</a></li>
+            <li><a href="#">Pay</a></li>
+        </ul>
+    </div>
+
     
 </body>
 </html>
