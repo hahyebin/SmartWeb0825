@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .wrap {
+            width: 480px;
+            margin: 0 auto;
+        }
+        .form_title {
+            text-align: center;
+            color : limegreen;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 480px;
+        }
+
+        table th{
+            background-color: lightgray;
+            border-top:2px solid silver;
+            border-bottom:2px solid silver;
+            padding:5px;
+        }
+        table input:focus, table select:focus {
+            background-color: azure;
+            
+        }
+
+        table td {
+          padding: 10px;
+        }
+        table td:first-of-type {
+            width: 130px;
+        }
+        table td:nth-of-type(2) {
+            width: 350px;
+        }
+
+        table input[type="text"],  table input[type="password"],  table select{
+            height: 25px;
+            border:1px solid silver;
+            width: 200px;
+            padding: 2px 7px;
+            outline: none;
+        }
+        table tfoot td {
+            text-align: center;
+            padding-top: 20px;
+        }
+        table input[type="submit"],  table input[type="reset"] {
+            height: 30px;
+            width: 80px;
+        }
+        #mobile1,  #mobile2,  #mobile3 {
+            width: 80px;
+        }
+        #email1, #email2 {
+            width: 130px;
+        }
+        .btn_primary {
+            width: 150px;
+            height: 40px;
+            background-color: gray;
+            border: none;
+            color: white;
+        }
+        .btn_reset{
+            background-color: lightgray;
+            color: black;
+        }
+        .btn_primary:hover{
+            cursor: pointer;
+            box-shadow: 0 2px 2px black;   /* x방향 y방향 blur color*/
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1 class="form_title">회원가입 폼</h1>
+        <form method="POST" enctype="multipart/form-data">   <!-- 파일 첨부 위한 폼-->
+            <table>
+                <tbody>
+                    <tr>
+                        <th action="join.do" colspan="2">필수정보</th>
+                    </tr>
+                    <tr>
+                        <td><label for="user_id">아이디</label></td>
+                        <td><input id="user_id" class="long_input" type="text" name="id" autofocus required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="user_pwd">비밀번호</label></td>
+                        <td><input id="user_pwd" class="long_input" type="password" name="pwd" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userPwdCheck">비밀번호확인</label></td>
+                        <td><input id="userPwdCheck" class="long_input" type="password" name="pwdCheck" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userName">이름</label></td>
+                        <td><input id="userName" class="long_input" type="text" name="name"></td>
+                    </tr>
+                    <tr>
+                        <td>성별</td>
+                        <td>
+                            <input type="radio" id="unisex" name="gender" value="선택안함" checked>
+                            <label for="unisex">선택안함</label>
+                            <input type="radio" id="male" name="gender" value="남자">
+                            <label for="male">남자</label> 
+                            <input type="radio" id="female" name="gender" value="여자">
+                            <label for="female">여자</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="mobile1">연락처</label></td>
+                        <td>
+                            <select id="mobile1" name="mPhone1">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                            </select>
+                            - <input type="text" id="mobile2" name="mPhone2" maxlength="4">
+                            - <input type="text" id="mobile3" name="mPhone3" maxlength="4">
+                        </td>
+                    </tr>
+                    <tr  id="nothing">
+                        <td colspan="2"><!--여백으로 사용--></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">선택정보</th>
+                    </tr>
+                    <tr>
+                        <td><label for="nick">닉네임</label></td>
+                        <td><input type="text" id="nick" name="nickname" class="long_input"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email1">이메일</label></td>
+                        <td>
+                            <input type="text" id="email1" name="emailId" class="middle_input">
+                            @
+                            <input type="text" id="email2" name="emailDomain"  placeholder="도메인입력/선택" list="domains">
+                            <datalist id="domains">
+                                <option value="gmail.com"/>
+                                <option value="naver.com"/>
+                                <option value="kakao.com"/>
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>이메일 수신</td>
+                        <td>
+                            <input id="yesEmail" type="radio" name="emailAgree" value="yes" checked>
+                            <label for="yesEmail">수신</label>
+                            <input id="noEmail" type="radio" name="emailAgree" value="no">
+                            <label for="noEmail">수신안함</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SMS 수신</td>
+                        <td>
+                            <input id="yesSMS" type="radio" name="smsAgree" value="yes" checked>
+                            <label for="yesSMS">수신</label>
+                            <input id="noSMS" type="radio" name="smsAgree" value="no">
+                            <label for="noSMS">수신안함</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>취미 활동</td>
+                        <td>
+                            <input id="reading" type="checkbox" name="hobbies" value="독서">
+                            <label for="reading">독서</label>
+                            <input id="fishing" type="checkbox" name="hobbies" value="낚시">
+                            <label for="fishing">낚시</label>
+                            <input id="swimming" type="checkbox" name="hobbies" value="수영">
+                            <label for="swimming">수영</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>프로필사진</td>
+                        <td>
+                            <input type="file" name="profile">
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input class="btn_primary btn_join" type="submit" value="회원가입" > 
+                            <input class="btn_primary btn_reset" type="reset" value="다시작성" >
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </form>
+    </div>
+
+
+</body>
+</html>
