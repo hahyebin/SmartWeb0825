@@ -31,11 +31,8 @@
             outline: 0 none;
             cursor: pointer;
         }
-        .wrap{
-            height: 100%;
-        }
+        .wrap{ height: 100%;  }
         /* header */
-     
         .header {
             padding-bottom: 69px;
         }
@@ -54,9 +51,8 @@
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_00_common_c860f0da.png);
             background-size: 244px 92px;
         }
-        .header .blind{
-            position: absolute;
-            display: block;
+        .blind{
+            display: inline-block;
             width: 1px;
             height: 1px;
             overflow: hidden;
@@ -79,7 +75,7 @@
         }
         .menu_item{
             display: table-cell;
-            vertical-align: top;
+            vertical-align: middle;
         }
         .menu_id, .menu_ones, .menu_qr {
             display: block;
@@ -95,44 +91,49 @@
             background-color: #f8f9fa;
         }
         .menu_id { border-radius: 5px 0 0 0; }
+        .menu_ones { border-width: 1px 0;    }
         .menu_qr { border-radius: 0 5px 0 0; }
-     
         .menu_id .menu_text::before {
             content: '';
-            display: block;
+            display: inline-block;
             width: 24px;
             height: 24px;
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_01_login_2d02c3e8.png);
             background-size: 229px 196px;
             background-position: -26px -172px;
             position: absolute;
-            top: 19px;
             left: 35px;
-
+            vertical-align: middle;
         }
         .menu_ones .menu_text::before {
             content: '';
-            display: block;
+            display: inline-block;
             width: 24px;
             height: 24px;
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_01_login_2d02c3e8.png);
             background-size: 229px 196px;
             background-position: -78px -172px;
             position: absolute;
-            top: 19px;
+            vertical-align: middle;
             left: 30px;
         }
         .menu_qr .menu_text::before {
             content: '';
-            display: block;
+            display: inline-block;
             width: 24px;
             height: 24px;
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_01_login_2d02c3e8.png);
             background-size: 229px 196px;
             background-position: -180px -78px;
             position: absolute;
-            top: 19px;
+            vertical-align: middle;
             left: 35px;
+        }
+        .menu_text {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 17px;
+            padding-left: 18px;
         }
 
         /* 폼 */
@@ -156,6 +157,11 @@
             border: 1px solid #dadada;
             padding: 17px 18px 17px 19px;
         }
+        .input_row:first-of-type {
+            border-bottom: 0;
+            border-radius: 5px 5px 0 0;
+        }
+        .input_row:nth-of-type(2) {   border-radius: 0 0 5px 5px; }
         .icon_cell {
             display: table-cell;
             width: 26px;
@@ -184,16 +190,17 @@
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_01_login_2d02c3e8.png);
             background-size: 229px 196px;
             background-position: -206px -97px;
-            
         }
+      
         /* .keep_check label::before{
             content: ''; 
             width: 23px;
             height: 23px;
             background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_01_login_2d02c3e8.png);
             background-size: 229px 196px;
-            background-position: -206px 0;
+            background-position: -155px -139px;
             position: absolute;
+            
         }
         .ip_check .blind::before {
             
@@ -203,16 +210,13 @@
             justify-content: space-between;
             margin-top: 20px;
         }
-        .btn_login_wrap{
-            margin-top: 30px;
-        }
+        .btn_login_wrap{   margin-top: 30px; }
         .btn_login {
             width: 100%;
             padding: 17px 0 15px;
             border-radius: 5px;
             border: solid 1px rgba(0,0,0,.15);
             background-color: #03c75a;
-           
         }
         .btn_text {
             font-size: 22px;
@@ -221,6 +225,83 @@
             color: #fff;
         }
 
+        /* 찾기 구역*/
+        .find_wrap {
+            padding: 24px 0 40px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        /* .find_wrap li + li ::before {
+            content: '|';
+            
+        } */
+        .find_wrap li:nth-of-type(n+2)::before {
+            content: '|';
+            display: inline-block;
+            width: 50px;
+            color: #dadada;
+        }
+        .find_wrap a{ 
+            color:#888; 
+            font-size: 16px;
+        }
+
+        /* 배너광고 */
+        .banner_wrap {
+            width: 553px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .banner_wrap .banner_inner{
+            display: inline-block;
+            border: 1px solid #dadada;
+            border-radius: 5px; 
+        }
+        .banner_img { border-radius: 5px;}
+
+        /* footer */
+        .footer { 
+            width:  553px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px 0 32px;
+            line-height: 16px;
+        }
+        .footer_link { padding: 0;}
+        .footer_link li{  display: inline-block;  }
+        .footer_link li:not(:first-of-type)::before {
+            content: '|';
+            display: inline-block;
+            width: 30px;
+            color: #dadada;
+        }
+        .footer_link li a { color: #888}
+        .footer_copy { 
+            width: 553px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 10px;
+            height: 17px;
+        }
+        .footer_copy a { display: inline-block; height: 17px;}
+        .footer_logo {
+            display: inline-block;
+            /* 보여줄 이미지의 크기 */
+            width: 70px;  
+            height: 15px;
+            background-image: url(https://ssl.pstatic.net/static/nid/login/m_sp_00_common_c860f0da.png);
+            background-size: 244px 92px;  /* 본 이미지 크기 */
+            background-position: 0 -51px; 
+        }
+        .footer_copy .text {
+            font-family: 'Helvetica Neue',sans-serif;
+            color: #888;
+        }
+        .footer_copy .corp {
+            font-family: 'Helvetica Neue',sans-serif;
+            padding: 0 2px;
+        }
     </style>
 </head>
 <body>
@@ -311,10 +392,42 @@
                 </ul>
             </form>
         </div>
-
-
-
+        <ul class="find_wrap">
+            <li>
+                <a href="#" targrt="_blank" class="find_text" >비밀번호 찾기</a>
+            </li>
+            <li>
+                <a href="#" targrt="_blank" class="find_text">아이디 찾기</a>
+            </li>
+            <li>
+                <a href="#" targrt="_blank" class="find_text">회원가입</a>
+            </li>
+        </ul>
+        <div class="banner_wrap">
+            <a href="#" target="_blank" class="banner_inner">
+                <img class="banner_img" src="https://ssl.pstatic.net/static/nid/login/banner/m_banner_qrcheckin_920.jpg" width="100%" height="100%">
+            </a>
+        </div>
+        <div class="footer">
+            <div class="footer_inner">
+                <ul class="footer_link">
+                    <li><a href="#" target="_blank" class="footer_item">이용약관</a></li>
+                    <li><a href="#" target="_blank" class="footer_item">개인정보처리방침</a></li>
+                    <li><a href="#" target="_blank" class="footer_item">책임의 한계와 법적고지</a></li>
+                    <li><a href="#" target="_blank" class="footer_item">회원정보 고객센터</a></li>
+                </ul>
+                <div class="footer_copy">
+                    <a href="#" target="_blank">
+                        <span class="footer_logo">
+                            <span class="blind">네이버</span>
+                        </span>
+                    </a>
+                    <span class="text">Copyright</span>
+                    <span class="corp">© NAVER Corp.</span>
+                    <span class="text">All Rights Reserved.</span>
+                </div>
+            </div>
+        </div>
     </div>
-    
 </body>
 </html>
