@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        /* 초기화 */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+            color:black;
+        }
+
+        /* 게시판 */
+        .board_container {
+            width: 700px;
+            background-color: aliceblue;
+            margin:0 auto;
+            padding-top: 15px; 
+        }
+        .board_title {
+            width: inherit;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* 게시판 테이블 & 폼*/
+        table {
+            width: 600px;
+            height: 186px;
+            margin: 5px auto 25px;
+            border-collapse: collapse;
+        }
+        table tr {
+            border-top: 1px solid darkgray;
+        }
+        table thead tr {
+            background-color: rgb(199, 194, 194);
+            border-top: 3px solid dimgray;
+            border-collapse: collapse;
+            height: 30px;
+        }
+        table tbody tr {  height: 30px;  }
+        table tbody tr:hover{
+            background-color: lightyellow;
+            cursor: pointer;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 3px solid dimgray;
+        }
+        table td { padding : 7px 0;}
+
+        table td:first-of-type{
+            padding-left: 8px; 
+            width: 62px;
+        }
+        table td:nth-of-type(2) { width: 220px; }
+        table td:nth-of-type(3) { width: 110px; }
+        table td:nth-of-type(4) { width: 140px; }
+        table td:nth-of-type(5) { width: 60px; }
+
+
+        /* 로그아웃 & 개인정보수정 버튼 */
+        .button_box {
+            width:222px;
+            margin: 5px auto 0;
+            padding-bottom: 20px;
+        }
+        .button_box a {
+            display: inline-block;
+            width: 100px;
+            height: 45px;   
+        }
+        .button_box a button{
+            width: inherit;
+            height: inherit;
+            background-color: darkblue;
+            border: 0;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+        .button_box a:first-of-type {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="board_container">
+
+        <h2 class="board_title">자유게시판</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <td>순번</td>
+                    <td>제목</td>
+                    <td>작성자</td>
+                    <td>작성일</td>
+                    <td>조회수</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5</td>
+                    <td>이용후기</td>
+                    <td>존윅</td>
+                    <td>2021-04-22</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>게시판이용문의</td>
+                    <td>제임스</td>
+                    <td>2021-04-22</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>가입인사</td>
+                    <td>새내기</td>
+                    <td>2021-04-21</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>[필독]게시판이용안내</td>
+                    <td>매니저</td>
+                    <td>2021-04-21</td>
+                    <td>94</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>[긴급]공지사항</td>
+                    <td>관리자</td>
+                    <td>2021-04-20</td>
+                    <td>85</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button_box">
+            <a href="login.html"><button>로그아웃</button></a>
+            <a href="personal_info.html"><button>개인정보수정</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

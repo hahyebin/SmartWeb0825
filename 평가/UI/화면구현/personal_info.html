@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보입력 폼</title>
+    <style>
+        /* 초기화 */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /* 개인정보 입력 박스 */
+        .personal_info_container {
+            background-color: aliceblue;
+            width: 600px;
+            height: 570px;
+            margin:0 auto;
+        }
+        h1 {
+            text-align: center;
+            width: 600px;
+            padding: 20px;
+        }
+        /* form */
+        form {
+            width: 500px;
+            margin: 10px auto 25px;
+        }
+        form table{
+            width: 500px;
+            border-collapse: collapse;
+            background-color: white;
+            margin-bottom: 30px;
+        }
+        form table thead tr {
+            text-align: center;
+            color: white;
+            background-color: darkblue;
+            height: 40px;
+            
+        }
+        form table td{   border: 1px solid gray;    }
+        
+        form table tbody td{
+            padding-left: 10px;
+            width: 130px;
+        }
+        form table tbody td:first-of-type {   width: 100px;   }
+        form table tbody tr { height: 40px; }
+        form table tbody .resi_num {  
+            width: 110px; 
+            height: 25px; 
+            border-radius: 0;
+            border: 1px solid gray;
+        }
+        form table tbody input[type="button"]{
+             width: 40px; 
+             height: 23px; 
+             border : 1px solid gray;
+             border-radius: 3px;
+             cursor: pointer;
+            }
+        form table tbody .birth{  
+            width: 60px; 
+            height: 25px; 
+            border-radius: 0;
+            border: 1px solid gray;
+         }
+        form table tbody textarea {
+            display: inline-block;
+            margin:5px auto 7px;
+            border: 1px solid gray;
+        }
+        
+        /* 수정완료 버튼 */
+        form .confirm a{
+            display: block;
+            margin: 15px auto 25px;
+            width: 100px;
+            height: 40px;
+        }
+        form .confirm input {
+            display: block;
+            width: 90px;
+            height: 40px;
+            background-color: darkblue;
+            color:white;
+            font-size: 16px;
+            border: 0;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="personal_info_container">
+
+        <h1>개인정보입력 폼</h1>
+
+        <form>
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2">개인정보</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="user_resi1">주민등록번호</label></td>
+                        <td>
+                            <input type="text" class="resi_num" maxlength="6" name="resi_num1" id="user_resi1" >
+                             - 
+                            <input type="password" class="resi_num" maxlength="6" name="resi_num2" id="user_resi2" >
+                            <input id="resi_check" type="button" value="검증">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="user_birth_year">생일</label></td>
+                        <td>
+                            <input class="birth" name="year" id="user_birth_year" type="text" maxlength="4"> 년
+                            <input class="birth" name="month" id="user_birth_month" type="text" maxlength="2"> 월
+                            <input class="birth" name="day" id="user_birth_day" type="text" maxlength="2"> 일
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>성별</td>
+                        <td>
+                            <label><input type="radio" name="gender" value="male"> 남자</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="gender" value="female"> 여자</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>관심분야</td>
+                        <td>
+                            <label><input type="checkbox" name="hobbies" value="travle"> 여행&nbsp;</label>
+                            <label><input type="checkbox" name="hobbies" value="movie"> 영화&nbsp;</label>
+                            <label><input type="checkbox" name="hobbies" value="book"> 독서&nbsp;</label>
+                            <label><input type="checkbox" name="hobbies" value="music"> 음악&nbsp;</label>
+                            <label><input type="checkbox" name="hobbies" value="nothing"> 관심없음</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="user_intro">자기소개</label></td>
+                        <td>
+                            <textarea cols="45" rows="10" id="user_intro"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="confirm">
+                <a href="board.html"><input type="button" value="수정완료"></a>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
