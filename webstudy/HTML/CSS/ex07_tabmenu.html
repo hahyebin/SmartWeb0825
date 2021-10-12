@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ul, ol {
+            list-style-type: none;
+        }
+        .container {
+            width: 300px;
+            margin: 20px auto;
+        }
+        /* menu bar */
+        input[type="radio"] {
+            display: none;
+        }
+        .tab_menu {
+            display: flex; 
+            width: 300px;
+        }
+        .tab_menu > label {
+            display: block;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border:1px solid gray;
+        }
+        .tab_menu > label:first-of-type{ border-right: none;}
+        .tab_menu > label:hover {
+            cursor: pointer;
+        }
+        #front_end:checked ~ div:first-of-type > label:nth-of-type(1)  {
+            background-color: beige;
+            color: rgb(247, 169, 182);
+            border-bottom: none;
+        }
+        #back_end:checked ~ div:first-of-type > label:nth-of-type(2) {
+            background-color: beige;
+            color: rgb(247, 169, 182);
+            border-bottom: none;
+        }
+
+        /* content */
+        .content_wrap { 
+            display: none;
+            width: 300px;
+            border:1px solid gray;
+            border-top: none;
+         }
+        .content { padding: 10px; }
+        .thumbnail {
+            width: 160px;
+            height: 120px;
+            background-image: url(../images/cat.jpg);
+            background-size: cover;
+        }
+        #front_end:checked ~ div:nth-of-type(2){
+            display: block;
+        }
+        #back_end:checked ~ div:nth-of-type(3){
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 상단 탭 -->
+        <input id="front_end" type="radio" name="tab" checked>
+        <input id="back_end" type="radio" name="tab">
+        <div class="tab_menu">   
+            <label for="front_end">프론트엔드</label>
+            <label for="back_end">백엔드</label>
+        </div>
+    
+        <!-- 1번째 탭 메뉴 -->
+        <div class="content_wrap">
+            <ul>
+                <!-- 각 메뉴 리스트 -->
+                <li class="content">
+                     <!-- 섬네일 이미지-->
+                    <div class="thumbnail">
+                    </div>
+                    <!-- 제목 및 내용 -->
+                    <div class="description">
+                        <h2>HTML</h2>
+                        <p>Hyper Markup Language</p>
+                    </div>
+                </li>
+                <!-- 각 메뉴 리스트 -->
+                <li class="content">
+                    <!-- 섬네일 이미지-->
+                   <div class="thumbnail">
+                   </div>
+                   <!-- 제목 및 내용 -->
+                   <div class="description">
+                       <h2>CSS</h2>
+                       <p>Cascade Style Sheet</p>
+                   </div>
+               </li>
+               <!-- 각 메뉴 리스트 -->
+               <li class="content">
+                <!-- 섬네일 이미지-->
+               <div class="thumbnail">
+               </div>
+               <!-- 제목 및 내용 -->
+               <div class="description">
+                   <h2>JavaScript</h2>
+                   <p>ECMA Script</p>
+               </div>
+           </li>
+            </ul>
+        </div>
+    
+    
+        <!-- 2번째 탭 메뉴 -->
+        <div class="content_wrap">
+            <ul>
+                <!-- 각 메뉴 리스트 -->
+                <li class="content">
+                     <!-- 섬네일 이미지-->
+                    <div class="thumbnail">
+                    </div>
+                    <!-- 제목 및 내용 -->
+                    <div class="description">
+                        <h2>JAVA</h2>
+                        <p>Object Oriented Programming</p>
+                    </div>
+                </li>
+                <!-- 각 메뉴 리스트 -->
+                <li class="content">
+                    <!-- 섬네일 이미지-->
+                   <div class="thumbnail">
+                   </div>
+                   <!-- 제목 및 내용 -->
+                   <div class="description">
+                       <h2>JSP</h2>
+                       <p>Java Server Page</p>
+                   </div>
+               </li>
+               <!-- 각 메뉴 리스트 -->
+               <li class="content">
+                <!-- 섬네일 이미지-->
+               <div class="thumbnail">
+               </div>
+               <!-- 제목 및 내용 -->
+               <div class="description">
+                   <h2>Spring</h2>
+                   <p>Java Framework</p>
+               </div>
+           </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
