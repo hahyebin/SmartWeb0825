@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 대화상자 
+        
+        // // 1. 경고창 
+        // alert('Hello World'); 
+        
+        // // 2. 확인창(확인, 취소 버튼)
+        //  if (confirm('계속 할까요?')) {
+        //     alert('계속합니다.');
+        //  } else 
+        //     alert('중지합니다.');
+
+        // // 3. 입력창(학습용으로 알아두기)
+        // let name = prompt('이름을 입력하세요');
+        // alert(name);
+    </script>
+</head>
+<body>
+     <!-- 
+         연습1. 이름, 국어, 영어, 수학 점수를 순서대로 입력 받고
+            화면에 이름, 평균, 학점을 출력하시오.
+     -->
+     <ul>
+         <li>이름 : <span id="name"></span></li>
+         <li>평균 : <span id="avg"></span></li>
+         <li>학점 : <span id="grade"></span></li>
+     </ul>
+     <script>
+         let name = prompt("이름을 입력하세요.");
+         let kor = Number(prompt("국어 점수를 입력하세요."));
+         let eng = Number(prompt("영어 점수를 입력하세요."));
+         let math = Number(prompt("수학점수를 입력하세요."));
+         let sum = kor + eng + math;
+         let avg = sum/3;
+         let grade;
+
+         //if 
+         if(avg>=90){
+                grade = "A";
+         } else if(avg>=80 && avg<90) {
+                grade = "B";
+         } else if (avg>=70 && avg<80) {
+                grade = "C";
+         } else if(avg>=60 && avg<70){
+                grade ="D";
+         } else 
+                grade = "F";
+
+        // 2. 자바 스타일의 switch
+        switch(Math.floor(avg/10)){
+            case 10: case 9: 
+                    grade = 'A'; break;
+            case 8: grade = 'B'; break;
+            case 7: grade = 'C'; break;
+            case 6: grade = 'D'; break;
+            default: grade = 'F';
+
+        }
+        // 3. 자바스크립트의 switch
+        // 자바스크립트의 switch는 case에서 크기 비교 연산이 가능하다.
+        switch(true) {  //true : switch문을 실행하시오.
+            case avg>=90: grade = 'A'; break;
+            case avg>=80: grade = 'B'; break;
+            case avg>=70: grade = 'C'; break;
+            case avg>=60: grade = 'D'; break;
+            default: grade = 'F';
+
+        }
+
+        document.getElementById('name').textContent = name;
+        document.getElementById('avg').textContent = avg;
+        document.getElementById('grade').innerHTML = '<strong>' + grade + '</strong>';
+       
+
+     </script>
+
+        <!-- 연습2. 순서대로 3개의 정수를 입력 받아서 가장 큰 수를 출력하시오. -->
+        <div id="max_value">
+
+        </div>
+        <script>
+            let num1 = parseInt(prompt("첫번째 숫자를 입력하세요"));  // '정수'이기 때문에 Number아닌 parseInt로
+            let num2 =  parseInt(prompt("두번째 숫자를 입력하세요"));
+            let num3 = parseInt(prompt("세번째 숫자를 입력하세요"));
+
+            if(num1>num2 && num1>num3){
+                let max_num = num1;
+            } else if (num2>num1 && num2>num3) {
+                 max_num = num2;
+            } else 
+                 max_num = num3;
+
+            document.getElementById('max_value').textContent = "가장 큰 수는 " + max_num;
+        </script>
+
+
+
+
+</body>
+</html>
