@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>보충수업 자료 구현하기</title>
+    <style>
+        * { 
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .board_container {
+            width: 700px;
+            height: 400px;
+            margin: 0 auto;
+            background-color: aliceblue;
+            padding: 10px 50px;
+        }
+        h1 {    margin-bottom: 20px;   }
+        .board {   width: 600px;   }
+        .board button{
+            background-color: navy;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            display: inline-block;
+            width: 100px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        .board .select {
+            height: 35px;
+            display: inline-block;
+            margin-left: 265px;
+        }
+        .search{
+            display:inline-block;
+            height: 35px;
+            position: relative;
+            margin-left: 20px;
+            
+        }
+        .board i {
+            position: absolute;
+            height: 33px;
+            display: inline-block;
+            line-height: 33px;
+            width:30px;
+            text-align: center;
+            background-color: lightgray;
+            border-radius: 5px 0 0 5px;
+            top:1px;
+            left: 1px;
+        }
+        .board input {
+            height: 35px;
+            border-radius: 5px;
+            width: 144px;
+        }
+        table {
+            width: 600px;
+            border-collapse: collapse;
+            margin-top: 10px;
+            text-align: center;
+        }
+        table tr {
+            height: 35px;
+            border-top: 1px solid gray;
+            border-bottom: 1px saddlebrown gray;
+        }
+        table thead tr:first-of-type {
+            border-top: 3px solid gray;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 3px solid gray;
+        }
+        table thead tr {
+            background-color: lightgray;
+        }
+        table tbody tr:hover{
+            background-color: bisque;
+        }
+        table tfoot span:hover{
+            font-weight: bold;
+            cursor: pointer;
+        }
+     
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="board_container">
+        
+        <h1>문의 게시글 목록</h1>
+        <div class="board">
+            <button class="button">새글 작성하기 </button>
+            <select class="select">
+                <option>제목</option>
+                <option>글쓴이</option>
+                <option>최신순</option>
+            </select>
+            <div class="search">
+                <i class="fas fa-search"></i><input type="text">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>No.</td>
+                        <td>제목</td>
+                        <td>작성자</td>
+                        <td>작성일</td>
+                        <td>조회수</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>알라딘</td>
+                        <td>박알란</td>
+                        <td>2020-01-05</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>흥부전</td>
+                        <td>이흥부</td>
+                        <td>2020-01-03</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>어린왕자</td>
+                        <td>김어린</td>
+                        <td>2020-01-02</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>필독</td>
+                        <td>관리자</td>
+                        <td>2020-01-01</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>공지사항</td>
+                        <td>관리자</td>
+                        <td>2020-01-01</td>
+                        <td>200</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <span>이전&nbsp;&nbsp;</span>
+                            <span>1&nbsp;&nbsp;</span>
+                            <span>2&nbsp;&nbsp;</span>
+                            <span>3&nbsp;&nbsp;</span>
+                            <span>4&nbsp;&nbsp;</span>
+                            <span>5&nbsp;&nbsp;</span>
+                            <span>다음</span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+
+    </div>
+    
+</body>
+</html>
