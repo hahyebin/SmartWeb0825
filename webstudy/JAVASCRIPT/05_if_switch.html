@@ -87,15 +87,17 @@
         </div>
         <script>
             let num1 = parseInt(prompt("첫번째 숫자를 입력하세요"));  // '정수'이기 때문에 Number아닌 parseInt로
-            let num2 =  parseInt(prompt("두번째 숫자를 입력하세요"));
+            let num2 = parseInt(prompt("두번째 숫자를 입력하세요"));
             let num3 = parseInt(prompt("세번째 숫자를 입력하세요"));
-
+            let max_num;
+            
             if(num1>num2 && num1>num3){
                 let max_num = num1;
             } else if (num2>num1 && num2>num3) {
                  max_num = num2;
             } else 
                  max_num = num3;
+
 
             document.getElementById('max_value').textContent = "가장 큰 수는 " + max_num;
         </script>
