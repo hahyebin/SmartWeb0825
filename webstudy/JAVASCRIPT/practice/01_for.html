@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10/14 for_while reveiw</title>
+</head>
+<body>
+    <!-- 복습 : div에 테이블 형식의 구구단 만들기 -->
+    <div id="box">
+
+    </div>
+
+    <script>
+        document.createElement('h1').textContent = '구구단을 외우자';
+
+        //DOM
+        //테이블 생성 
+        let table = document.createElement('table');
+        table.style.borderCollapse='collapse';
+        document.getElementById("box").appendChild(table);
+        //tbody 생성 
+        let tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        //tr&td 생성 
+        for(let n=1; n<=9; n++) {
+        let tr = document.createElement('tr');
+        tbody.appendChild(tr);
+            for(let dan=2; dan<=9; dan++){
+                let td = document.createElement('td');
+                td.style.border = '1px solid lightgrey';
+                td.textContent = dan +"X"+ n+"="+dan*n;
+                if (dan%2==0){
+                    td.style.backgroundColor = 'beige';
+                }
+                else {
+                    td.style.backgroundColor = 'lightpink';
+                }
+                tr.appendChild(td);
+            }
+        }
+
+        //text
+        let gugudan = '<table style="border:1px solid black"><tbody>';
+
+            for(let n=1; n<=9; n++){
+                gugudan += '<tr>';
+                    for(let dan=2; dan<=9; dan++){
+                        let value = dan +"X"+ n+"="+dan*n;
+                        if(dan%2==0){
+                            gugudan += '<td style="background-color:beige">' + value + '</td>';
+                        }
+                        else {
+                            gugudan += '<td style="background-color:lightpink">' + value + '</td>';
+                        }
+                    }
+                    gugudan += '</tr>';
+            }
+            gugudan += '</tbody></table>';
+            document.getElementById('box').innerHTML = gugudan;
+    </script>
+</body>
+</html>
