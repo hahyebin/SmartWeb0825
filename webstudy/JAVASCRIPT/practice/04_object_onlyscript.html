@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+            1. 객체
+                1) 여러 개의 값으로 구성된 하나의 데이터이다.
+                2) 데이터는 '속성(property)'과 '값(value)'으로 구성된다.
+                3) 생성자 함수를 통해서 객체를 생성할 수 있다. (new)
+                4) 중괄호({})를 이용해서 직접 객체를 생성할 수 있다.
+            2. 객체 생성
+                (1) 생성자 함수를 이용해서 생성 
+                    function 함수명(매개변수1, 매개변수2,..) {
+                        this.속성1 = 매겨변수1;
+                        this.속성2 = 매개변수2;
+                        ...
+                    }
+                    var 객체명 = new 함수명(인수1, 인수2);
+
+                (2) 중괄호({})를 이용해서 직접 생성
+                    var 객체명 = {
+                        'property' : 'value',
+                        'property' : 'value',
+                        'property' : 'value'
+                    };
+            3. 객체의 속성(property)
+                1) 객체.속성
+                2) 객체['속성']
+                3) 속성의 추가가 동적으로 진행된다. (없던 속성을 새로 만들어 넣을 수 있다.)
+
+            4. 객체의 속성(property) 순회
+                    1) for-in문 (일반 for문 불가)   // 객체에서 일반 for문을 사용하면 초기화값이 없으므로 실행 자체 불가
+                    2) for(var property in object) {      //속성의 타입은 string이다.
+                        객체.속성      //불가
+                        객체['속성']   //가능
+                    }
+
+        */
+    </script>
+</head>
+<body>
+   
+
+    <!-- 연습1. 다음 데이터를 테이블로 생성하시오. -->
+    <div id="box1">
+
+    </div>
+    <script>
+        let result = {
+            'lastBuildDate': '2021-10-15',
+            'total' : 3,
+            'items' : [
+                {
+                    'title':'오징어게임',
+                    'link' :'https://www.naver.com',
+                    'description' : '이제 모두 오징어가 될 시간이다.'
+                },
+                {
+                    'title':'갯마을 차차차',
+                    'link' :'https://www.google.com',
+                    'description' : '다함께 차차차~'
+                },
+                {
+                    'title':'더길티',
+                    'link' :'https://www.kakao.com',
+                    'description' : '장난 전화 하지 마세욤'
+                },
+            ]
+        }
+
+
+        let table = '<table border="1" style="border-collapse:collapse"><tbody>';
+        for(let p in result){
+           if(p!='items') {   // p가 items 가 아니면 출력하기
+              table += '<tr  id="'+p+'">'+'<td>' + p + '</td><td colspan="2">'+ result[p] + '</td></tr>'; 
+           }
+        }
+            table += '<tr>'
+            for(let p in result.items[0]){    // result.items배열의 propery를 갖고 오기 위한 for문
+                table += '<td>' + p + '</td>';  //각 property를 열에 추가
+            }
+            table += '</tr>';
+            
+            for(let j=0; j<result.items.length; j++){    //items의 배열만큼 행 생성
+                table += '<tr>';
+                for(let p in  result.items[0]){
+                    table += '<td>' + result.items[j][p] + '</td>';   //items[0]의 값, items[1]의 값, items[2]의 값 확인 
+            }
+            table += '</tr>';
+        }
+            table += '</tbody></table>';
+          
+            document.getElementById('box1').innerHTML = table;
+
+    </script>
+</body>
+</html>
