@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .box1 {
+            width: 500px;
+        }
+        .decem { 
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        table {
+            width: 500px;
+            border-collapse: collapse;
+            margin: 10px auto;
+        }
+        td { 
+            vertical-align: top;   
+            width: 70px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: left;
+            padding: 5px;  
+               
+        }
+        .day { 
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle;
+            height: 35px;
+        }
+        .holiday {  color: red; }
+        .next, .previous {   color: silver;  }
+        .x_max { 
+            font-size: 14px;
+            padding-left: 7px; 
+        }
+     
+        
+    </style>
+</head>
+<body>
+    <script>
+        //연습1. 아래 객체를 생성하고, 각 속성(property)을 확인하시오.
+        // 객체명 : bread
+        // name : 브레드
+        // age : 50
+        // birthday : 2021-10-15
+        // friend : name이 초코이고, age가 30인 객체
+        // bag : 우유, 쥬스
+        // hobby : 'I like running!' 메시지를 출력하는 함수
+
+        let bread = {
+            'name':'bread',
+            'age': 50,
+            'birthday':'2021-10-15',
+            'friend': {
+                'name':'초코',
+                'age': 30
+            },
+            'bag' : ['우유','주스'],
+            'hobby': () =>{
+                console.log("i like running");
+                }
+        }
+        console.log(bread.name);
+        console.log(bread.age);
+        console.log(bread.birthday);
+        console.log(bread.friend.age, bread.friend.name);
+        console.log(bread.bag[0], bread.bag[1]);
+        bread.hobby();
+        
+        </script>
+        <!-- 연습1. 다음 데이터를 테이블로 생성하시오. -->
+            <div id="box1">
+            </div>
+    <script>
+
+        let december = '<div class="decem">12월</div>'
+            december+='<table><thead><tr>'
+        let day = ['일','월','화','수','목','금','토'];
+            for(let d of day){
+                december += '<td class="day">'+d+'</td>';
+            }
+            december += '</tr></thead><tbody>';
+            december += '<tr><td class="previous">'+28+'</td>'
+                        + '<td class="previous">'+29+'</td>'
+                        + '<td class="previous">'+30+'</td>';
+            december += '<td>'+1+'</td>' + '<td>'+2+'</td>'
+                            + '<td>'+3+'</td>' +'<td>'+4+'</td>';
+       
+         for(let week=0; week<4; week++){
+            december += '</tr>'
+            let d = 5+(week*7);
+            for(let n=5; n<=11; n++){
+                switch(d){
+                    case 5: case 12: case 19: case 26:  
+                        december += '<td class="holiday">'+d+'</td>'; break;
+                    case 25:
+                    december += '<td class="holiday">'+d+'<p class="x_max">'+'성탄절'+'</p></td>'; break;
+                    case 31:
+                        december += '<td>' + d + '</td><td class="next">'+1+'</td>'; break; 
+                    default: december += '<td>'+d+'</td>';   break;
+                }
+                if(d==31){
+                    break;
+                }
+                d++;
+            }
+            december += '</tr>';
+        }
+        december += '</tbody></table>'
+        document.getElementById('box1').innerHTML = december;
+
+
+
+
+    </script>
+
+</body>
+</html>
