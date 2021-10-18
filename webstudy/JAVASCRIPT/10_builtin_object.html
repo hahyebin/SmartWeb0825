@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Built in Object</title>
+</head>
+<body>
+    
+    <!-- 1. Date 객체 -->
+    <script>
+        // 1. 현재 날짜와 시간 
+        let now = new Date();
+        console.log(now);
+        // 2. 특정 날짜(2021-10-18)와 시간(14:20:30)
+        let date1 = new Date(2021, 9, 18);  // 월: 0 ~ 11 사이로 사용함.
+        let date2 = new Date(2021,9,18,14,20,30);
+        let date3 = new Date('2021-10-18 14:20:30');  // 문자열은 날짜 그대로 작성함
+        console.log(date1);
+        console.log(date2);
+        console.log(date3);
+        // 3. 년, 월, 일, 시, 분, 초 추출
+        let year = now.getFullYear();
+        let month = now.getMonth() +1;  // 월 : 0~11
+        let day = now.getDate();
+        let weekNumber = now.getDay(); // 0(일),1(월),2(화),3(수),..6(토)
+        let hour = now.getHours();
+        let minute = now.getMinutes();
+        let second = now.getSeconds();
+        console.log(year, month, day, weekNumber, hour,minute,second);
+    </script>
+    <!-- 연습1. 시계만들기 -->
+    <div iv="box1">
+        <h1 class="watch">
+            <span id="year"></span>년&nbsp;
+            <span id="month"></span>월&nbsp;
+            <span id="date"></span>일&nbsp;
+            <span id="day"></span>요일&nbsp;
+            <span id="hour"></span>시&nbsp;
+            <span id="minute"></span>분&nbsp;
+            <span id="second"></span>초&nbsp;
+        </h1>
+    </div>
+    <script>
+    
+    // 1. 1초마다 반복실행되는 setInteval() 함수 사용 
+    // 1000밀리초(1초) function(){}이 실행된다
+    /*  
+        setInterval(function(){
+            // 작업하기 
+            let now = new Date();
+            document.getElementById('year').textContent = now.getFullYear();
+            if(now.getMonth()+1<10){
+                document.getElementById('month').textContent ="0"+ (now.getMonth()+1);
+            } else   document.getElementById('month').textContent = (now.getMonth()+1);
+            document.getElementById('date').textContent= now.getDate();
+            let weekName = ['일','월','화','수','목','금','토'];
+            document.getElementById('day').textContent = weekName[now.getDay()];
+            if(now.getHours()<10){
+                document.getElementById('hour').textContent = '0'+now.getHours();
+            } else  document.getElementById('hour').textContent = now.getHours();
+            if(now.getMinutes()<10){
+                document.getElementById('minute').textContent ='0' + now.getMinutes();
+            } else document.getElementById('minute').textContent = now.getMinutes();
+            if(now.getSeconds() < 10){
+                document.getElementById('second').textContent ="0" + now.getSeconds();
+            } else document.getElementById('second').textContent = now.getSeconds();
+        }, 1000)
+        
+        setInterval(function(){
+            // 작업하기 
+            let now = new Date();
+            document.getElementById('year').textContent = now.getFullYear();
+            document.getElementById('month').textContent = fillZero(now.getMonth()+1);
+            document.getElementById('date').textContent= fillZero(now.getDate());
+            let weekName = ['일','월','화','수','목','금','토'];
+            document.getElementById('day').textContent = weekName[now.getDay()];
+            document.getElementById('hour').textContent = fillZero(now.getHours());
+            document.getElementById('minute').textContent = fillZero(now.getMinutes());
+            document.getElementById('second').textContent = fillZero(now.getSeconds());
+        }, 1000)
+        */
+
+        // 2. setTimeout() 함수를 1초마다 호출 
+        function watch() {
+            setTimeout(function(){
+                let now = new Date();
+                document.getElementById('year').textContent = now.getFullYear();
+                document.getElementById('month').textContent = fillZero(now.getMonth()+1);
+                document.getElementById('date').textContent= fillZero(now.getDate());
+                let weekName = ['일','월','화','수','목','금','토'];
+                document.getElementById('day').textContent = weekName[now.getDay()];
+                document.getElementById('hour').textContent = fillZero(now.getHours());
+                document.getElementById('minute').textContent = fillZero(now.getMinutes());
+                document.getElementById('second').textContent = fillZero(now.getSeconds());
+                watch();
+            },1000);
+        }
+        watch(); //watch() 함수 실행
+
+        // 0~9 ==> 00~09
+        function fillZero(number){
+            if(number<10){
+                return '0'+number;
+            } else 
+                return number;
+        }
+
+
+           
+    </script>
+
+    <!-- 연습2. D-Day 만들기 -->
+    <!-- 
+        2021-11-18일을 Dday로 설정해서 아래와 같이 표시하시오
+        1. D-DAY 30일 5시간 10분 15초 
+        2. D-DAY 23시간 10분 15초
+        3. D_DAY 입니다.
+    -->
+
+    <div id="box2"></div>
+    <script>
+        
+     // 1. 1초마다 반복실행되는 setInteval() 함수 사용 
+        /*
+        setInterval(function() {
+            document.getElementById('box2').innerHTML = getDDay();
+        },1000);
+        */
+     // 2. setTimeout() 함수를 1초마다 호출 
+        function dDay(){
+            setTimeout(function(){
+                document.getElementById('box2').innerHTML = getDDay();
+                dDay();
+            },1000);
+        }
+        dDay(); // dDay() 함수 실행 
+        function getDDay(){
+                //1. 현재 날짜와 시간 생성
+                let today = new Date();
+                // 2. 디데이 생성(2021-11-18)
+                let dDay= new Date(2021,10,18);
+                // new Date('2021-11-18');  2021-11-18 09:00:00 생성 (우리나라는 UTC +9시)
+                console.log(dDay);
+                // 3. 두 날짜의 차이
+                let restTime = dDay-today;           //차이가 밀리초(1/1000초)
+                console.log(restTime);
+                restTime = parseInt(restTime/1000)   //초단위로 변환됨. 밀리초는 버려짐 
+                let dday_second = restTime%60;               // 초 구하기
+                let dday_minute = parseInt(restTime/60)%60;  // 분 구하기
+                let dday_hour = parseInt(restTime/3600)%24;  // 시간 구하기
+                let dday_day = parseInt(restTime/3600/24);   // 일 구하기
+                // 4. 결과만들기
+                let result = 'D-DAY&nbsp;';
+                if(restTime > 0) {
+                    if(dday_day>0){
+                        result += dday_day + "일&nbsp";
+                    }
+                    result += dday_hour +'시간&nbsp;' + dday_minute+'분&nbsp;' + dday_second +'초 '; 
+                } else { //restTime <= 0 
+                    result += "입니다.";
+                }
+                // 5. 결과 반환하기 
+                 return result;
+        }
+    </script>
+
+    <!-- 2. Math 객체 -->
+    <script>
+        console.log('최댓값: '+Math.max(1,2,3,4,5));
+        console.log('최솟값: '+Math.min(1,2,3,4,5));
+        console.log('절대값: '+ Math.abs(-5));
+        console.log('제곱근(루트): '+Math.sqrt(25));
+        console.log('난수: '+Math.random()); // 0.0<= 난수 <1.0
+        console.log('올림: '+Math.ceil(1.5));    // 1.5 정수로 올림 == 2
+        console.log('반올림: '+Math.round(1.5)); // 1.5를 정수로 반올림 == 2
+        console.log('내림: '+Math.floor(1.5));   // 1.5를 정수로 내림 == 1
+        console.log('절사: '+Math.trunc(1.5));   // 1.5를 정수로 절사 == 1
+    </script>
+</body>
+</html>
