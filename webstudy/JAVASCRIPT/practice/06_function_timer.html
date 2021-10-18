@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="timeinterval_boom"> </h1>
+    <h3 id="timeout_boom"></h3>
+    <script>
+        let countDown = 5;
+        
+        setInterval(() =>
+        {
+            if(countDown==0)
+            document.getElementById('timeinterval_boom').textContent = 'interval boom!!';
+            else 
+                document.getElementById('timeinterval_boom').textContent = countDown--;
+                }, 1000);
+
+       (function countDownBoom() {
+           setTimeout(()=> {
+            if(countDown==0){
+                document.getElementById('timeout_boom').innerHTML = 'setTimeout() BBoom!';
+                return;
+            } else 
+                document.getElementById('timeout_boom').innerHTML = countDown--;
+                countDownBoom();
+            
+        },1000);
+    })();
+
+    </script>
+    
+    <!-- 1초마다 색이 변하게 만들어보기 -->
+    <div id="box2"></div>
+    <script>
+        let box2 = document.getElementById('box2');
+        box2.style.width = '200px';
+        box2.style.height = '200px';
+        let color = ['red','pink','blue','purple','green','yellow','orange'];
+        let i =0;
+        setInterval(()=>{
+                box2.style.backgroundColor= color[i++];
+                i %= color.length;     
+            },1000);
+    </script>
+</body>
+</html>

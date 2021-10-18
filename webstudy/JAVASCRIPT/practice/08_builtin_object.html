@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div iv="box1">
+        <h1 class="watch">
+            <span id="year"></span>년&nbsp;
+            <span id="month"></span>월&nbsp;
+            <span id="date"></span>일&nbsp;
+            <span id="day"></span>요일&nbsp;
+            <span id="hour"></span>시&nbsp;
+            <span id="minute"></span>분&nbsp;
+            <span id="second"></span>초&nbsp;
+        </h1>
+    </div>
+    <script>
+        setInterval(() => {
+            let now = new Date();
+            document.getElementById('year').textContent = now.getFullYear();
+            document.getElementById('month').textContent = zero(now.getMonth()+1);
+            document.getElementById('date').textContent = now.getDate();
+            let dayName = ['일','월','화','수','목','금','토'];
+            document.getElementById('day').textContent = dayName[now.getDay()];
+            document.getElementById('hour').textContent = zero(now.getHours());
+            document.getElementById('minute').textContent = zero(now.getMinutes());
+            document.getElementById('second').textContent = zero(now.getSeconds());
+        }, 1000);
+
+        function zero(number){
+            if(number<10){
+                return '0'+number;
+            } return number;
+        }
+    </script>
+
+        <div id="box2"></div>
+       <!-- 연습2. 새해 D-Day 만들기 -->
+       <script>
+           setInterval(() => {
+               document.getElementById('box2').innerHTML = '<h1 style="background-color:yellowgreen">새해까지의 '+D_DAY();+'</h1>';
+           }, 1000);
+           
+           function D_DAY(){
+                let today = new Date();
+                let newYear = new Date(2022, 0,1);
+                let diff = newYear-today;
+                console.log(diff);  // 1000분의 1초
+                diff = diff/1000;   // 초단위변환 + 밀리초 버림 
+                let second = parseInt(diff%60); // 초단위에서 남은 60초의 나머지가 남는초
+                let min = parseInt(diff/60%60); //분 단위로  나눈 나머지가 분 
+                let hour = parseInt(diff/60/60%24); // 시간 단위(3600)로 나눈 나머지가 남은 시간 
+                let dday = parseInt(diff/3600/24); // 시간 단위에서 하루의 몫 
+                console.log(dday, hour, min,second);
+                
+                let result ='D-DAY '
+                if(diff>0){
+                    if(dday>0){
+                        result += dday +'일 ';
+                    }
+                    result += hour +'시간 '+min+"분 "+second+"초";
+                }
+                return result;
+           }
+       </script>
+
+        <!-- 연습3. 크리스마스 D-Day 만들기 -->
+        <div id="box3"></div>
+        <script>
+            setInterval(()=> {
+                document.getElementById("box3").innerHTML = '<h1 style="background-color:red">'+chritmas(); +'</h1>';
+            },1000)
+
+
+            function chritmas() {
+            let today2 = new Date();
+            let chritmas = new Date(2021, 11, 25);
+            let diff2 = chritmas-today2;  //밀리초 (1000분의 1초)
+            diff2 = diff2/1000;  //초단위 변환 
+            let x_second = parseInt(diff2%60);
+            let x_min = parseInt(diff2/60%60);
+            let x_hour= parseInt(diff2/3600%24);
+            let x_day = parseInt(diff2/3600/24);
+            let result2 ='크리스마스까지의 D-DAY ';
+            if(diff2>0){
+                if(x_day>0){
+                    result2 += x_day +'일 ';
+                } 
+                result2 += x_hour+'시간 '+x_min +"분 "+x_second+"초 ";
+             }
+             return result2;
+            }
+
+        </script>
+</body>
+</html>

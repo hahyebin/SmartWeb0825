@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin:0;
+        }
+        .animal_ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .animal_li {
+            width: 200px;
+            height: 200px;
+            margin-right: 20px;
+            background-size: contain;
+            background-size: 200px 200px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 60px;
+        }
+        .student_table {
+            margin-top: 10px;
+            margin-left: 10px;
+            border-collapse: collapse;
+        }
+        .student_table thead {
+            background-color: beige;
+        }
+        .student_table td {
+            border: 1px solid black;
+            width: 80px;
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <script>
+      //연습1. 아래 객체를 생성하고, 각 속성(property)을 확인하시오.
+        // 객체명 : iphone
+        // name : iphone12
+        // color : white, black, silver
+        // made: 2021-10-15
+        // des : 크기가 13인치인 객체
+        // review : 'i love iphone'; 메시지를 출력하는 함수 
+    let iphone = {
+        'name':'iphone12',
+        'color': ['white','black','yellow'],
+        'made': '2021-10-18',
+        'des' : {
+            'size': '13inch'
+        },
+        'review': () => {
+            console.log("i love iphone");
+        }
+    }
+    console.log(iphone);
+    console.log(iphone.name);
+    console.log(iphone.color[0], iphone.color[1], iphone.color[2]);
+    console.log(iphone.made);
+    console.log(iphone.des.size);
+    iphone.review();
+
+    </script>
+
+
+    <!-- 화면 구성하기 -->
+    <div id="box2"></div>
+    <script>
+        let animals = [
+            {
+                'type': 'cat',
+                'name': '냥냥이',
+                'age': '3살'
+            },
+            {
+                'type': 'dog',
+                'name': '멍멍이',
+                'age': '2살'
+            },
+            {
+                'type': 'lion',
+                'name': '어흥이',
+                'age': '5살'
+            },
+        ];
+
+        let box2 = '<ul class="animal_ul">';
+        for(let index in animals){
+            box2 += '<li class="animal_li" style="background-image:url(../../images/'+animals[index].type+'.jpg")>';
+            box2 += animals[index].type+'<br>';
+            box2 += animals[index].name+'<br>';
+            box2 += animals[index].age+'<br></li>';
+        }
+        box2 += '</ul>';
+        document.getElementById('box2').innerHTML = box2;
+    </script>
+
+    <div id="box3"></div>
+     <!-- 연습3. Student 객체를 생성자 함수로 생성하시오 -->
+    <!-- 
+        Student 속성
+        1) 값 : name, kor, eng, mat
+        2) 함수 : getAverage, getGrade
+    -->
+    <script>
+      function Student(name, kor, eng, mat){
+            this.name = name;
+            this.kor=kor;
+            this.eng=eng;
+            this.mat=mat;
+            this.getAvg = () => { return Math.round((this.kor + this.eng+this.mat)/3)};
+            this.getGrade = () =>{
+                switch(true){
+                 case (this.getAvg() >= 90 ): return "A";
+                 case (this.getAvg() >= 80 ): return "B";
+                 case (this.getAvg() >= 70 ): return "C";
+                 case (this.getAvg() >= 60 ): return "D";
+                 default: return "F";
+                }
+        } 
+    }
+    let students = [
+        new Student('kim',65,66,67),
+        new Student('park',78,76,70),
+        new Student('lee',87,88,89) 
+    ];
+
+
+    let student_table ='<table class="student_table"><thead class=""><tr>';
+    let thead =['이름','국어점수','영어점수','수학점수','평균','학점'];
+    let i=0;
+    for(i in thead){
+        student_table += '<td>'+thead[i++]+'</td>';
+    }
+    student_table += "</tr></thead><tbody>";
+
+    // 방법1.
+    for(let k in students){
+        student_table += '<tr>';
+        student_table += '<td>'+students[k].name+'</td>';
+        student_table += '<td>'+students[k].kor+'</td>';
+        student_table += '<td>'+students[k].eng+'</td>';
+        student_table += '<td>'+students[k].mat+'</td>';
+        student_table += '<td>'+students[k].getAvg()+'</td>';
+        student_table += '<td>'+students[k].getGrade()+'</td>';
+        student_table += '</tr>';
+    }
+
+    // 방법2. 불가능 
+    // for(let k=0; k<students.length; k++){
+    //     student_table += '<tr>';
+    //         for(let index in students[k]){      // -----> [index] 모양이 함수의 형식이 아니기 때문에 문자 그대로 나타남 
+    //             student_table += '<td>'+students[k][index] +'</td>';
+    //         }
+    //         student_table += '</tr>';
+    // }
+
+
+    student_table += '</tbody></table>'
+    document.getElementById('box3').innerHTML = student_table;
+
+
+    </script>
+</body>
+</html>

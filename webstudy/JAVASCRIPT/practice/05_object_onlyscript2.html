@@ -43,7 +43,7 @@
         .holiday {  color: red; }
         .next, .previous {   color: silver;  }
         .x_max { 
-            font-size: 14px;
+            font-size: 12px;
             padding-left: 7px; 
         }
      
@@ -122,10 +122,43 @@
         }
         december += '</tbody></table>'
         document.getElementById('box1').innerHTML = december;
+    </script>
 
+    <div id="box2">
 
-
-
+    </div>
+    <script>
+        let november = '<div class="title">11월</div>';
+        
+        let no_day =  ['일','월','화','수','목','금','토'];
+        november += '<table><thead><tr>'
+        for(let k in no_day){
+            november += '<td>'+k+'</td>';
+        }
+        november += '</tr></thead><tbody>'
+        for(let week=0; week<5; week++){
+            november +='<tr>'
+                let k = 7 + (week*7)
+                for(let d=1; d<=7; d++){
+                    k++;
+                    switch(k){
+                        case 1: november += '<td class="previous">31</td><td>'+k+'</td>'; break;
+                        case 7: case 14: case 21: case 28:
+                            november += '<td class="holiday">'+k+'</td>'; break;
+                        case 30:
+                            november +=  '<td>'+k+'</td>';
+                            for(let t=1; t<=4; t++){
+                                november += '<td class="next">'+t+'</td>';
+                            }; break;
+                        default: november += '<td>'+k+'</td>'; break;
+                    }    
+                    
+                  
+                }
+                november += '</tr>';
+        }
+        november += '</tbody></table>';
+        document.getElementById("box2").innerHTML = november;
     </script>
 
 </body>
