@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+    <p>form의 네가지 submit 방법이다.<br>
+        query가 parameter / 직접입력한 값이 value이며<br>
+        action의 값은 value에 적은 주소를 보낼 곳이다.<br>
+        보낼 곳에는 action의 주소?name의value=value의value;  형태로 주소창에 뜬다.<br>
+        아래에서 주소를 입력하지 않으면 submit이 되지 않아 현재 창이고<br>
+        입력된다면 action주소로 넘어가 https://search.naver.com/search.naver?query=검색어   와 같은 형태가 나타난다.
+    </p><hr>
+    <!--★★★★★★★ 1. submit 하는 방법 ★★★★★★★-->
+    <form id="form1" action="https://search.naver.com/search.naver">  
+        <p>★1. 가장 기본 버전이며 외우기!</p>
+        <input type="text" name="query" id="query1"> 
+        <!-- button의 기본 타입은 submmit이기 때문에 action으로 보내진다.-->
+        <button>검색</button> <!-- button 태그는 submit을 수행한다.(기본 이벤트) -->
+    </form>
+    
+    <!-- <script>
+        // ★ 중요
+        let form1 = document.getElementById('form1');
+        let query1 = document.getElementById('query1');
+            form1.onsubmit = function(event) {  //submit대상은 form
+                   if(query1.value == '' ){
+                       alert('검색어를 입력하세요.');
+                       query1.focus();  //검색창으로 커서를 보내 줌.
+                       event.preventDefault() //기본 이벤트 방지(submit 방지)
+                       return false;
+                  }
+        }
+    </script> -->
+    
+    <script>
+  
+        document.getElementById('form1').onsubmit = function (event) {
+           if(document.getElementById('query1').value == ''){
+               alert('검색어입력하세요');
+               document.getElementById('query1').focus();
+               event.preventDefault();
+              // return false;
+           }
+        }
+    </script><hr>
+
+
+    <!-- 2. submit 하는 방법-->
+    <form id="form2" action="https://search.naver.com/search.naver" onsubmit="return searchFunc()">
+        <p>2. 인라인모델에서 onsubmit(덜 사용하는 편)</p>
+        <input type="text" name="query" id="query2">
+        <button>검색</button>
+    </form>
+
+    <script>
+        function searchFunc() {
+            let form2 = document.getElementById("form2");
+            let query2 = document.getElementById("query2");
+                if(query2.value == ''){
+                    alert("검색어는 필수입니다.");
+                    query2.style.outline = "1px solid blue";
+                    query2.focus()
+                    return false;   // submit을 하지 않음
+                }
+                return true;        // submit 함 
+        }
+    </script><hr>
+
+    <!-- 3. submit 하는 방법 -->
+    <form id="form3">
+        <p>3. 기본이벤트가 없는 일반 버튼에서 submit 등록 / return으로 종료 </p>
+        <input type="text" name="query" id="query3">
+        <input type="button" value="검색" id="search_btn"> <!-- 기본 이벤트가 없는 일반 버튼 -->
+    </form>
+    <script>
+        let form3 = document.getElementById("form3");
+        let query3 = document.getElementById("query3");
+        let searchBtn = document.getElementById("search_btn");
+
+            searchBtn.onclick = function(){
+                if(query3.value == ''){
+                    alert("검색어를 꼭 입력해 주세요");
+                    query3.focus();
+                    return;     //이벤트 리스너 종료
+                }
+                form3.action = "https://search.naver.com/search.naver";
+                form3.submit();
+            }
+    </script><hr>
+
+    <!-- 4. name 속성으로 스크립트 작업하기 -->
+    <form>
+        <p>4. name 속성으로 스크립트 작업하기(코드길이가 짧은 방법)</p>
+        <input type="text" name="query">
+        <input type="button" value="검색" onclick="naverSearch(this.form)">
+    </form>
+    <script>
+        function naverSearch(f){
+            if(f.query.value == '') {
+                alert('검색어를 해주세요');
+                f.query.focus();
+                return;
+            }
+            f.action  = "https://search.naver.com/search.naver";
+            f.submit();
+        }
+    </script><hr>
+
+    <!-- 연습1. 검색 결과를 구글 검색으로 나타내시오. -->
+    <h3>연습1. 검색 결과를 구글 검색으로 나타내시오</h3>
+    <p> - 검색 결과를 구글 검색으로 나타내시오(일반적인 방법)</p>
+    <form action="https://www.google.com/search" id="google_form">
+        <input type="text" id="google_search" name="q">
+        <button>검색</button>
+    </form>
+    <script>
+        let gForm = document.getElementById('google_form');
+        let gSearch = document.getElementById('google_search');
+
+    
+        gForm.onsubmit = function(event){
+            if(gSearch.value == ''){
+                alert("검색어를 입력하세요");
+                gSearch.focus();
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
+
+    <p> - 검색 결과를 구글 검색으로 나타내시오(일반 button의 return/form onsubmit()적용)</p>
+    <form id="google_form2">
+        <input type="text" id="google_search2" name="q">
+        <input type="button" value="검색" id="google_btn">
+    </form>
+    <script>
+        document.getElementById('google_btn').onclick = function(){
+            if(document.getElementById('google_search2').value == ''){
+                alert("검색어를 입력하세요2");
+                document.getElementById('google_search2').focus();
+                document.getElementById('google_search2').style.outlineColor = 'red';
+                return;
+               }
+                document.getElementById('google_form2').action="https://www.google.com/search";
+                document.getElementById('google_form2').submit();
+           }  
+         
+    </script>
+    <p> - 검색 결과를 구글 검색으로 나타내시오(name 속성)</p>
+    <form>
+        <input type="text" name="q">
+        <input type="button" value="검색" onclick="google_submit(this.form)">
+    </form> 
+    <script>
+        function google_submit(f){
+            if(f.q.value == ''){
+                alert("검색어를 입력하세요3");
+                f.q.focus();
+                f.q.style.backgroundColor = "pink"; 
+                return fasle;
+            }
+            f.action = "https://www.google.com/search";
+            f.submit();
+        }           
+    </script><hr>
+        
+
+    <!-- 5. 전체 선택 체크 박스 구현하기 -->
+    <p>5. 전체 선택 체크 박스 구현하기</p>
+    <form>
+        <h1>약관동의</h1>
+        <input type="checkbox" id="check_all">
+        <label for="check_all">모두 동의 합니다.</label>
+        <br><br>
+        <input type="checkbox" class="check" id="service">
+        <label for="service">이용약관에 동의합니다.</label>
+        <br>
+        <input type="checkbox" class="check" id="privacy">
+        <label for="privacy">개인정보수집에 동의합니다.</label>
+        <br>
+        <input type="checkbox" class="check" id="location">
+        <label for="location">위치정보수집에 동의합니다.</label>
+        <br>
+        <input type="checkbox" class="check" id="promotion">
+        <label for="promotion">프로모션 정보 수신에 동의합니다.</label>
+        <br>
+    </form>
+
+    <script>
+        let checkAll = document.getElementById("check_all");
+        let check = document.getElementsByClassName('check');
+        // 1. 전체 선택을 클릭한 경우 
+        checkAll.onclick = function(){
+            for(let i=0; i<check.length; i++){
+                check[i].checked = checkAll.checked;
+            }
+          
+        //     if(checkAll.checked == true){
+        //        for(let i=0; i<check.length; i++) {
+        //          check[i].checked= true;
+        //         }
+        //  } else if(checkAll.checked == false){
+        //         for(let j=0; j<check.length; j++) {
+        //             check[j].checked = false;
+        //         }
+        //     }
+        }
+
+            // 2. 개별 선택을 클릭한 경우
+            for(let i=0; i<check.length; i++){
+                check[i].onclick = function(){
+                    // 4개중 하나를 클릭하면 
+                    // 모든 개별 체크 항목을 살펴봐서 
+                    // 1) 하나라도 체크가 해제되어있으면 전체선택해제
+                    // 2) 모두 체크가 되어있으면 전체 선택
+                  for(let j=0; j<check.length; j++) {
+                    if(check[j].checked==false){
+                        checkAll.checked  = false;
+                        return;  // 이벤트 리스너 종료
+                    }
+                }
+                //  for(let j=0; j<check.length; j++) {} 루프가 모두 돌려면, 모두 체크되어 있어야 한다.
+                checkAll.checked  = true;
+                }
+            }
+    </script><hr><br>
+
+
+    <!-- 
+        6. 정규식 다루기
+        
+            1) regular expression 
+            2) 특정 문자열이 조건에 부합하는지 판단하기 위한 표현식이다.
+            3) 자바스크립트의 정규식 작성
+                let regExp = /정규식/;
+            4) 정규식 체크 메소드 
+                (1) '문자열'.match(정규식) : null(만족안함)
+                (2) 정규식.test('문자열')  : false(만족안함), true(만족) - 주로 사용 
+            5) 정규식 메타 문자(정규식에서는 공백이 있으면 의미를 포함해서 나타나기 때문에 공백을 절대 주지않는다.)
+                 (1) a        : 문자 a를 의미함.
+                 (2) a|b      : 문자 a 또는 문자 b를 의미함
+                 (3) .        : 모든 문자 1글자를 의미함
+                 (4) ^a       : 문자 a로 시작
+                 (5) a&       : 문자 a로 끝남
+                 (6) a*       : 문자 a가 여러 번 나타남. 안 나타나도 됨
+                 (7) a+       : 문자 a가 여러 번 나타남. 1번은 나타남
+                 (8) a{n}     : 문자 a가 n번 나타남
+                 (9) a{n,}    : 문자 a가 n번 이상 나타남.(최소 n번)
+                 (10) a{n,m}  : 문자 a가 n번 이상 m번 이하 나타남
+            6) 정규식 문자 클래스
+                 (1) [a]      : 문자 a를 의미함
+                 (2) [.]      : 문자 .를 의미함 (\.)
+                 (3) [ab]     : 문자 a 또는 문자 b를 의미함
+                 (4) [^a]     : 문자 a를 제외
+                 (5) ^[a]     : 문자 a로 시작함
+                 (6) [a]$     : 문자 a로 끝남
+                 (7) [0-9]    : 0~9를 의미함. 숫자를 의미함
+                 (8) [a-z]    : a~z를 의미함. 소문자를 의미함
+                 (9) [A-Z]    : A~Z를 의미함. 대문자를 의미함 
+                 (10) [가-힣] : 가~힇을 의미함 한글을 의미함
+                 (11) \s      : 공백문자(space)를 의미함
+                 (12) \S      : 공백문자(space)가 아님을 의미함
+                 (13) \d      : 숫자(digit)를 의미함. = [0-9]
+                 (14) \D      : 숫자(digit)가 아님을 의미함
+                 (15) \w      : 문자(word)를 의미함. 영숫자와 밑줄과 같음.([a-zA-Z0-9_])
+                 (16) \W      : 문자(word)가 아님을 의미함
+            ** 특수문제 있는지 확인 [^a-zA-Z0-9] => true       
+    -->
+    <form>
+        <p> - 정규식 핸드폰 번호입력하기</p>
+        <input type="text" name="tel" id="tel">
+        <input type="button" value="검증" id="verify_btn">
+    </form>
+    <script>
+        let regTel = /^010-[0-9]{3,4}-[0-9]{4}$/;  // = /\d{3}-\d{3,4}-\d{4}$/
+        let verifyBtn =  document.getElementById('verify_btn');
+        let tel = document.getElementById('tel');
+        document.getElementById('verify_btn').onclick = function(){
+            if(regTel.test(tel.value))
+                alert('핸드폰 번호가 맞습니다.');
+            else 
+                alert('핸드폰 번호가 아닙니다.');
+        }
+
+
+    </script>
+</body>
+</html>

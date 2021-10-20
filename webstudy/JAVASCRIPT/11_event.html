@@ -60,7 +60,7 @@
                     function f(){
 
                     }
-                    <div onclick="f()"></div>        // ★f() 괄호 있으멩 주의.
+                    <div onclick="f()"></div>        // ★f() 괄호 있음에 주의.
                   
                     (2) 익명 함수 등록 
                     <div onclick="function(){}"></div>
@@ -125,7 +125,11 @@
             console.log(event)
             this.value = '눌렀네요';
         }
+        function fu1(params) {
+            alert(params +"님이 눌렀네요 반갑습니다.");
+        }
         btn222.onclick = function(event) {
+            fu1('혜빈')                                     // 매개변수를 넣고 싶다면 함수를 따로 지정해서 블록문 안에 넣기 
             console.log('이벤트 대상: '+event.target);
             console.log('이벤트 대상: '+this);
             console.log(this.type);
@@ -163,9 +167,9 @@
 
          }
          // 표준 이벤트 모델은 2개 이상의 이벤트 리스너 등록이 가능함
-         btn3.addEventListener('click', () => func2(event,'hyeee'));
+         btn3.addEventListener('click', () => func2(event,'hyeee'));       // 같은 이벤트 대상에서 이벤트 중복이가능함
          btn3.addEventListener('click', func3);
-     </script>
+    </script>
     <br><hr><br>
      <!-- ★★★★ 4. 기본 이벤트 -->
      <input type="text" id="query">  <!-- value="사용자가 입력한 값" -->
