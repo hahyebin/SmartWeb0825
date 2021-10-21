@@ -1,0 +1,190 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 12px;
+    color: black;
+}
+ul, ol {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.join_header{
+    height: 89px;
+    border-bottom: 1px solid #dfe2e6;
+    text-align: center;
+}
+.logo a {
+    display: inline-block;
+    width: 140px;
+    height: 36px;
+    margin-top: 28px;
+    background-image: url(https://img2.tmon.kr/resources/shared/p/im/membership/sp-membership.png?v=20210831164155);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 0;
+}
+.join_form {
+    width: 500px;
+    margin: 0 auto;      
+}
+.join_title {
+    margin: 50px 0 0 0;
+    font-size: 28px;
+    text-align: center;
+}
+.join_form form{
+    display: block;
+    margin: 30px 0 10px 0;
+    font-size: 16px;
+    line-height: 20px;
+}
+.join_form .input{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    padding:  0 40px 0 15px;
+    border: 1px solid #ccd2d8
+}
+.checked+.msg {
+    display: none;
+}
+.input input[type=text], .input input[type=password]{
+    width: 100%;
+    height: 100%;
+    border: 0 none;
+    outline: 0 none;
+    font-size: 16px;
+}
+.msg {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 11px;
+    line-height: 14px;
+    color: #777;
+}
+.dont {
+    color: #ff1515;
+}
+.no_required {
+    font-size: 12px;
+    color: #888;
+}
+/*생년월일*/
+.date{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+}
+.date .select_box {
+    width: 161px;
+    height: 100%;
+    border: 1px solid #ccd2d8;
+    position: relative;
+    margin-bottom: 20px;
+}
+.lst {
+    display: none;
+    position: absolute;
+    top: 48px;
+    left: -1px;
+    max-height: 240px;
+    width: 161px;
+    overflow-y: auto;
+    border: 1px solid #ccd2d8;
+    background-color: #fff;
+    z-index: 1;
+}
+.show {
+    display:block;
+}
+.lst li a {
+    display: block;
+    width: 100%;
+    height: 45px;
+    font-size: 15px;
+    line-height: 45px;
+    padding-left: 15px;
+}
+.lst li a:hover {
+    background-color: lightgray;
+}
+#year_value {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    line-height: 45px;
+    padding-left: 15px;
+    color: gray;
+    margin-bottom: 20px;
+}
+#year_select {   display: none;  }
+/* 성별 */
+.two_selector {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+}
+.selector {
+    display: block;
+    width: 50%;
+    height: 50px;   
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+.selector span {
+    display: inline-block;
+    font-size: 16px;
+    color: gray;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ccd2d8;
+}
+.selector input[type="radio"]{  display: none;  }
+.selector:first-child{    border-right: 0; }
+.selector > input[type="radio"]:checked + span {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    color: rgb(242, 121, 53);
+    font-weight: bold;
+    border : 1px solid rgb(242, 121, 53);
+}
+.btn_send_mail {
+    display: none;
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    border : 1px solid rgb(242, 121, 53);
+    background-color: white;
+    font-size: 12px;
+    font-weight: 900;
+    color: rgb(242, 121, 53);
+}
+.btns_area{
+    width: 100%;
+    height: 64px;
+    margin-top: 20px;
+}
+.btn_submit{
+    width:100%;
+    height: 100%;
+    background-color: rgb(242, 121, 53);
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    border : 0;
+    outline: 0;
+}
+
