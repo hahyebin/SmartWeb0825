@@ -34,7 +34,7 @@ a {
     margin: 0 auto;      
 }
 .join_title {
-    margin: 50px 0 0 0;
+    margin: 50px 0;
     font-size: 28px;
     text-align: center;
 }
@@ -65,7 +65,7 @@ a {
 .msg {
     display: block;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 11px;
     line-height: 14px;
     color: #777;
@@ -78,6 +78,10 @@ a {
     color: #888;
 }
 /*생년월일*/
+.form_title {
+    display: inline-block;
+    margin-top: 20px;
+}
 .date{
     display: flex;
     justify-content: space-between;
@@ -119,21 +123,47 @@ a {
     background-color: lightgray;
 }
 #year_value {
+    display: inline-block;
     width: 100%;
     height: 100%;
     font-size: 15px;
     line-height: 45px;
     padding-left: 15px;
     color: gray;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
+#month_value {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    line-height: 45px;
+    padding-left: 15px;
+    color: gray;
+    margin-bottom: 30px;
+}
+#day_value {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    line-height: 45px;
+    padding-left: 15px;
+    color: gray;
+    margin-bottom: 30px;
+}
+
 #year_select {   display: none;  }
+#month_select {   display: none;  }
+#day_select {   display: none;  }
+
+
 /* 성별 */
 .two_selector {
     display: flex;
     width: 100%;
     height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .selector {
     display: block;
@@ -161,11 +191,18 @@ a {
     font-weight: bold;
     border : 1px solid rgb(242, 121, 53);
 }
+/*배너 */
+.banner {
+    margin-top: 25px;
+}
+
+/* 가입 버튼 */
 .btn_send_mail {
     display: none;
     width: 200px;
     height: 40px;
     margin-top: 20px;
+    margin-bottom: 20px;
     border : 1px solid rgb(242, 121, 53);
     background-color: white;
     font-size: 12px;
@@ -186,5 +223,18 @@ a {
     color: white;
     border : 0;
     outline: 0;
+    cursor: pointer;
 }
 
+/* footer */
+.footer {
+    width: 100%;
+    height: 100px;
+    margin: 60px auto;
+}
+.footer p{
+    color: #888;
+    font-size: 13px;
+    font-weight: 200;
+    text-align: center;
+}

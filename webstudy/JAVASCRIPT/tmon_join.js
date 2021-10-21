@@ -26,7 +26,6 @@
                   }
                }
             
-         
              userId.onblur = function(){
              // ajax : DB 다녀오기
                  if(this.value.length >= 4) {
@@ -95,13 +94,17 @@
                      msg[3].className = 'msg dont';    // 공백이면 dont추가
                  } else if(regName.test(userName.value)){   // 공백이 아니면 테스트 통과
                      userName.parentNode.className = 'input checked';
+                    
                  } else {
                      userName.parentNode.className = 'input';
                      msg[3].textContent = '이름은 한글, 영문 대소문자만 사용해주세요.';
                      msg[3].className = 'msg dont';
                  }
              }// end of function  
-             userName.addEventListener('keyup', fn_vaildName);
+             userName.addEventListener('keyup', function(){
+                msg[3].className = 'msg';
+                fn_vaildName();
+             });
              userName.addEventListener('blur', fn_vaildName);
  
              // 5. 생년월일
@@ -142,10 +145,84 @@
                      yearSelect.value = this.textContent;
                  });
              }
+              // 월 만들기 
+              //1) 월의 Ul li
+              let monthList = document.querySelector('#month > ul');
+              let strMonthList = '<li><a href="#" data-uri="월">월</a></li>';
+             for(let m=1; m<=12; m++){
+                strMonthList += '<li><a href="#" data-uri="'+ m+ '">' + m + '</a></li>';
+             }
+             monthList.innerHTML = strMonthList;
+
+             // 2)월의 select
+             let monthSelect = document.getElementById('month_select');
+             let strMonthOption = '<option value="">선택</option>'
+             for(let m=1; m<=12; m++){
+                 strMonthOption += '<option value="'+m+'">'+m+'</option>'
+             }
+             monthSelect.innerHTML = strMonthOption;
+
+             // 3)월 클릭하면 보여주기 
+             let month = document.getElementById('month');
+             month.addEventListener('click', function(){
+                 monthList.className = 'lst show';
+             });
+             month.addEventListener('mouseout', function(){
+                 monthList.className = 'lst';
+             });
+              monthList.addEventListener('mouseover', function(){
+                monthList.className = 'lst show';
+            });
+            // 4) 선택한 월(a 태그)를 month_value에 표시
+             let monthLink = document.querySelectorAll('#month > ul > li > a');
+             let monthValue = document.getElementById('month_value');
+             for(let i=0; i<monthLink.length; i++){
+                 monthLink[i].addEventListener('click', function(){
+                     monthValue.textContent = this.textContent;  // this == yearLink[i];
+                     monthSelect.value = this.textContent;
+                 });
+             }
+
+
+                // 일 만들기
+                // 1) 일의 ul li
+              let dayList = document.querySelector('#day > ul');
+              let strDayList = '<li><a href="#" data-uri="일">일</a></li>';
+              for(let d=1; d<=31; d++){
+                strDayList += '<li><a href="#" data-uri="'+ d+ '">' + d + '</a></li>';
+             }
+            dayList.innerHTML = strDayList;
+            // 2) 일의 select
+            let daySelect = document.getElementById('day_select');
+             let strDayOption = '<option value="">선택</option>'
+             for(let d=1; d<=31; d++){
+                 strDayOption += '<option value="'+d+'">'+d+'</option>'
+             }
+             daySelect.innerHTML = strDayOption;
+
+             // 3)일 클릭하면 보여주기 
+             let day = document.getElementById('day');
+             day.addEventListener('click', function() {
+                dayList.className = 'lst show';
+             });
+             day.addEventListener('mouseout',function(){
+                dayList.className = 'lst';
+             });
+             dayList.addEventListener('mouseover', function(){
+                dayList.className = 'lst show';
+             });
+             // 4) 선택한 월(a 태그)를 month_value에 표시
+             let dayLink = document.querySelectorAll('#day > ul > li > a');
+             let dayValue = document.getElementById('day_value');
+             for(let i=0; i<dayLink.length; i++){
+                 dayLink[i].addEventListener('click', function(){
+                     dayValue.textContent = this.textContent;  // this == yearLink[i];
+                     daySelect.value = this.textContent;
+                 });
+             }
+
+
          
- 
-             ///////////////////////////////월. 일 하기/////////////////////////////
-        
  
              // 6. 이메일
              let userEmail = document.getElementById("userEmail");
