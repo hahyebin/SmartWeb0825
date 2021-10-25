@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js"></script>
+  
+</head>
+<body>
+  <div class="wrapper">
+
+      <header class="logo">
+          <img src="logo.png">
+      </header>
+
+      <section class="loginbox_wrapper">
+        <form action="index.html" method="post" >
+            <div class="check">
+                <span class="div_mem">※ 회원구분을 위해 체크해 주세요</span>
+                <input type='radio' name="member" id="member" value="exist_member">
+                <label for="member">수강생 </label>
+                <input type='radio' name="member" id="non_member" value="non_member">
+                <label for="non_member">일반회원</label>
+            </div>
+
+       
+            <div class="login_box">
+                <input type="text" name="userId" id="userId" placeholder="아이디">
+            </div>
+            <span class="msg_red" id="msg"></span>
+
+            <div class="login_box">
+                <input type="text" name="userPw" id="userPw" placeholder="●●●●">
+            </div>
+            <button id="login_btn">로그인</button>
+        </form>
+        
+
+        <div class="join_search">
+            <ul>
+                <li><span class="join_search_title">아직 회원이 아닌가요?</span></li>
+                <li><span class="join_search_desc">가입하면 다양한 서비스 이용이 가능합니다.</span></li>
+                <li><a href="#"><input type="button" value="회원가입" class="join_search_btn"></a></li>
+            </ul>
+
+            <ul>
+                <li><span class="join_search_title">아이디/비밀번호를 잊으셨나요?</span></li>
+                <li><span class="join_search_desc">간단하게 아이디/비밀번호를 찾을 수 있습니다.</span></li>
+                <li><a href="#"><input type="button" value="아이디/비밀번호 찾기" class="join_search_btn"></a></li>
+            </ul>
+        </div>
+      </section>
+  </div>
+ 
+</body>
+</html>
