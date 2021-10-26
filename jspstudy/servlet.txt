@@ -1,0 +1,4 @@
+<form action = "/01_SERVLET/MyServlet" method="post">
+..-->
+       서버측으로 보내는 것 : request
+</form>
