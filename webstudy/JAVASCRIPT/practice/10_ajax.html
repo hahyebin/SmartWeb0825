@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>서울시 따릉이</title>
+    <style>
+        ul, ol{  list-style: none; }
+        table { 
+            margin-top: 20px;
+            border-collapse: collapse;}
+        td{ 
+            padding: 10px;
+            border: 1px solid black;
+        }
+        caption{ font-weight: bold;}
+        h1 span { font-size: 20px;}
+    </style>
+
+<script>
+    $(document).ready(function(){
+    let now = new Date();
+    let date ='';
+    date = (now.getMonth()+1)+"월 "+now.getDate()+"일 "+now.getHours()+"시 "+now.getMinutes()+"분 기준";
+    $('#time').html(date);
+
+
+    // 클릭하면 따릉이 수 보여주기 
+    $("#btn").on('click',function(){
+
+        // ajax
+        $.ajax({
+            'url':'http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99',
+            'dataType':'json',
+            'type':'get',
+            'data':{},
+            'success': function(data){
+                fn_ajax(data);
+            },
+            'error':function(xhr, textStatus){
+                alert("코드를 다시 한 번 보세요.");
+            }
+
+        }); // end of ajax
+
+        function fn_ajax(data){
+            // 파일자체 읽어올때 가장 큰 객체를 data로 지정 => 그 속의 rentBikeStatus 과 rentBikeStatus 객체의 row를 읽어와야 장소와 남은자전거 수를 알 수 있다. 
+            let rows = data.rentBikeStatus.row;  
+            let result='';
+            let total = 0;
+            for(let i=0;i <rows.length; i++){
+               let stationName = rows[i].stationName;
+               let parkingBikeTotCnt = rows[i].parkingBikeTotCnt;
+                total += Number(parkingBikeTotCnt);
+                result += '<tr>';
+                result +='<td>'+ stationName +'</td>';
+                result += '<td>'+parkingBikeTotCnt+'</td>';
+                result += '</tr>';
+                
+            }
+            $('caption').text("현재 자전거 수: "+total+"대");
+            $('#bicycle_list').html(result);
+            }
+
+        });
+    });
+</script>
+</head>
+<body>
+    
+    <h1>현재 서울 따릉이 수<span> (현재시간 : <span  id="time">??</span>)</span></h1>
+
+        <div>
+            <input type="button" id="btn" value="확인하기" width="100">
+            <table>
+                <caption>현재 자전거 수</caption>
+                <thead>
+                    <tr>
+                        <td>장소</td>
+                        <td>현재 자전거 수</td>
+                    </tr>
+                </thead>
+            <tbody id="bicycle_list" >
+
+            </tbody>
+            </table>
+        </div>
+</body>
+
+</html>
