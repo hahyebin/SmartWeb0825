@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!--  편지 쓰기 -->
+	<!--  작성일은 현재 날짜가 YYYY-MM-DD 형식으로 자동 입력된다. -->
+	<!--  편지 작성하기 버튼을 클릭하면 "YYYY-MM-DD_보내는사람.txt" 파일이 생성된다.  -->
+	<!-- 
+		작성일 : 2021-10-27
+		보내는사람 : 하혜빈
+		받는사람 : 수지
+	    안녕하세요:-)
+	 -->
+	 
+	 
+	 
+	 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	 <script>
+		$(document).ready(function(){
+			//날짜
+			let now = new Date();
+			let y = now.getFullYear();
+			let m = now.getMonth()+1;
+			let d = now.getDate()
+			if ( $("#date").val() == ""){
+				$("#date").val(y+"-"+m+"-"+d);
+			}
+			
+			// 버튼을 클릭하면 Quiz2 서블릿으로 요청하고 그곳에서 파일로 출력되는 걸 응답하는 것!!! 여기선 요청만 보내자!
+			$("#btn").on("click",function(){
+				alert('동작확인용');
+				if( $("#from").val() == ""){
+					alert("보내는사람을 적어주세요");
+					 $("#from").focus();
+					 return;
+				} else if( $("#to").val() == "" ){
+					alert("받는사람을 적어주세요.");
+					 $("#to").focus();
+					 return;
+				} else if( $("textarea").val() == "" ){
+					alert("내용이 없습니다.");
+					 $("textarea").focus();
+					 return;
+				} 
+				$("form").attr("action","/01_SERVLET/Quiz2");   // para=value 서브밋시 알아서 감 
+				$("form").submit();
+			});
+		});
+	
+	
+	</script>
+	 
+	<form>
+		<input type="text" name="date" id="date">
+		<br>
+		<input type="text" name="from" id="from" placeholder="보내는사람">
+		<br>
+		<input type="text" name="to" id="to" placeholder="받는사람">
+		<br>
+		<textarea name="content" placeholder="내용"></textarea>
+		<br>
+		<input type="button" value="편지작성하기" id="btn">
+	</form>
+	
+
+</body>
+</html>
