@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ <script>
+    $(document).ready(function(){
+    	$("#btn").on("click",function(){
+    		let x = /^[0-9]{1,4}&/;
+    		let y = /^[0-9]{1,4}&/;
+    		if($("#x").val() == "" ) {
+    			alert("첫번째 값을 입력해주세요.");
+    			$("#x").focus();
+    			return;
+    		} else if ($("#y").val() == ''){
+    			alert("두번째 값을 입력해주세요.");
+    			$("#y").focus();
+    			return;
+    		}
+    		
+    		$("form").attr("action","/Practice/cal1");
+    		$("form").submit();
+    		
+    		
+    	});
+    });
+    
+ 
+ 
+ 
+ </script>
+ 	<form>
+ 		<p>계산할 값을 입력하세요</p>
+		<input type="text" name="x" id="x"  placeholder="첫번째값">
+		<input type="text" name="y" id="y" placeholder="두번째값">
+		<input type="button" id="btn" value="계산하기">
+	</form>
+ 
+
+
+
+</body>
+
+
+
+
+
+</html>
