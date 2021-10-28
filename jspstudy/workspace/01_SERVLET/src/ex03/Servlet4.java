@@ -37,7 +37,7 @@ public class Servlet4 extends HttpServlet {
 		// Optional 클래스 : jdk 1.8 이상 지원
 		// null 처리
 		
-		// Optional.of(인수) : 인수가 null이 아니면 처리
+		// Optional.of(인수) : 인수가 null이 아니면 처리  => 빈문자열이 아닌 null만 체크함! 빈문자열 확인은 따로 하기! if ( 변수명.isEmpty() or equals("") )
 		/*
 		String name = request.getParameter("name");
 		Optional<String> optName = Optional.of(name); // name이 null이 아니면 처리한다.

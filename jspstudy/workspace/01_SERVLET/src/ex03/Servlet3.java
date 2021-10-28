@@ -43,7 +43,7 @@ public class Servlet3 extends HttpServlet {
 		// 2) 파라미터 처리
 		//    파라미터는 항상 String으로 전달됨. 
 		String name = request.getParameter("name");                               // name.equals("")가능하지만 전용메서드인 isEmpty()를 사용하는 편 
-		if ( name == null || name.isEmpty() ) {     // 널값과 form 의 빈 입력란을 위한 isEmpty() 사용 -> form에 파라미터는 이미 name이라고 주어짐 
+		if ( name == null || name.isEmpty() ) {     // form 의 빈 입력란을 위한 isEmpty() 사용 -> form에 파라미터는 이미 name이라고 주어짐 
 			name = "하혜빈";
 		}
 		String strAge = request.getParameter("age");

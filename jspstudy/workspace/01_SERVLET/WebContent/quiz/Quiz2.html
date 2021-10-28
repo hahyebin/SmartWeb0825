@@ -26,9 +26,9 @@
 			let y = now.getFullYear();
 			let m = now.getMonth()+1;
 			let d = now.getDate()
-			if ( $("#date").val() == ""){
+		
 				$("#date").val(y+"-"+m+"-"+d);
-			}
+		
 			
 			// 버튼을 클릭하면 Quiz2 서블릿으로 요청하고 그곳에서 파일로 출력되는 걸 응답하는 것!!! 여기선 요청만 보내자!
 			$("#btn").on("click",function(){
@@ -46,6 +46,7 @@
 					 $("textarea").focus();
 					 return;
 				} 
+				$("form").attr("method","post");
 				$("form").attr("action","/01_SERVLET/Quiz2");   // para=value 서브밋시 알아서 감 
 				$("form").submit();
 			});
@@ -55,7 +56,7 @@
 	</script>
 	 
 	<form>
-		<input type="text" name="date" id="date">
+		<input type="text" name="date" id="date" readonly>
 		<br>
 		<input type="text" name="from" id="from" placeholder="보내는사람">
 		<br>
