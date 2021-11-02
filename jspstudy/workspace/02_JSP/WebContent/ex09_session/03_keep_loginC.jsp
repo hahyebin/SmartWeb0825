@@ -30,7 +30,7 @@
 				for(Cookie cookie : cookies ){
 					if( cookie.getName().equals("userId")){
 						// 쿠키에 있는 값을 session으로 옮겨주기 
-						session.setAttribute("userID", cookie.getValue());      // admin
+						session.setAttribute("userId", cookie.getValue());      // admin
 					}
 					// 쿠키에 있는 값을 session으로 옮겨주기 
 					if( cookie.getName().equals("userName")){
