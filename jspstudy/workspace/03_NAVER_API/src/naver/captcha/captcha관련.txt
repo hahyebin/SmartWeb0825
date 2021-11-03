@@ -1,0 +1,58 @@
+chaptcha
+EfI8HhY51r1KSViceL9i
+j6dttir_jK
+네이버로부터 반환 받은 데이터 : {"key":"CuJhWRWA6me1C2UO"}
+
+1. 아이디/시크릿 전송 ( 해당 값 보고 유효한 사용자인지 네이버에서 판단 ) 
+		+ 키 요청(prarameter로 보내기)
+
+2. 네이버가 키 발급해 줌 (JSON 형식의 키) : JSON 형식 처리 라이브러리( json을 자바 객체로 바꿔주는 라이브러리 갖고오기) https://mvnrepository.com/search?q=json
+
+3. 아이디/시크릿/키 전송 + 이미지 요청 
+
+4. 네이버가 이미지 발급해 줌 
+
+5. 아이디/시크릿/키/그림문자 전송 + 입력값 칸 요청  (1번과정과 가장 유사함 key와 value 변수와 주소 파라미터 전달. 네이버가 응답하는건 boolean이므로 응답 반환을 boolean으로 하기)
+
+6. 네이버는 성공/실패 여부 반환 (JSON 반환) 
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+	1.
+		String clientId = "EfI8HhY51r1KSViceL9i";
+		String clientSecret = "j6dttir_jK";
+		
+		String code = "0";   //  키 발급 "0", 이미지 비교 "1"
+		String apiURL ="https://openapi.naver.com/v1/captcha/nkey?code="+code;
+	
+		// 요청 헤더(request header) : 아이디, 시크릿 
+		Map<String, String> requestHeaders = new HashMap<>();
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+		
+		
+		-----> ct요청하면 naver 에서는 request.getHeader("X-Naver-Client-Id") 이런 형식으로 값과 비교
+		
+	2-json
+		 JSON 형식 처리 라이브러리
+		 네이버가 json형식으로 줬기 때문에 자바에선 json객체를 읽을 것이 필요하고 이를 위해 라이브러리를 사용함 
+		JSONObject obj = new JSONObject(sb.toString());
+		String captchaKey = (String) obj.get("key");   // 객체 타입이기 때문에 문자열 형변환 필요 
+		System.out.println(captchaKey);
+		
+		
+---------------------------------------------------------------------------------------------------------------------
+		
+		
+1)index.jsp : 'link' ->      //---> 폴더를 만들어서 jsp를 만들지 말기!
+2)naver : 키와 이미지 받고 
+3)login.jsp		: 로그인 화면 보기
+		
+		
+		
+		
+		
