@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Lotto;
 import model.Now;
 import model.Today;
+import model.GuGudan;
 
 
 @WebServlet("*.do")
@@ -41,6 +42,10 @@ public class MyController extends HttpServlet {
 			break;
 		case "lotto.do":
 			Lotto lotto = new Lotto();
+			lotto.excute(request, response);
+			break;
+	        case "gugudan.do":
+			GuGudan gugudan = new GuGudan();
 			lotto.excute(request, response);
 			break;
 		}
