@@ -10,7 +10,8 @@
 	<a href="/MVC/today.do?name=하혜빈&age=26"> 오늘 날짜 확인하기</a><br>
 	<a href="/MVC/now.do"> 현재 시간 확인하기 </a><br>
 	
-	<a href="/MVC/lotto.do"> 로또번호 여섯개출력 </a>
+	<a href="/MVC/lotto.do"> 로또번호 여섯개출력 </a><br>
+	<a href="/MVC/gugudan.do">구구단 출력하기 </a><br>
 </body>
 	
 </html>
