@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@page import="java.io.*"%>
+<%@page import="java.net.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 			if( cookies != null || cookies.length!=0){
 				for(Cookie cookie : cookies){
 					if(cookie.getName().equals(cookieName)){
-						result = cookie.getValue();
+						result = URLDecoder.decode(cookie.getValue(),"UTF-8"); //생년월일 인코딩설정때문에 디코딩필수 다른건 cookie.getValue()로 출력가능 
 					}
 				}
 			}

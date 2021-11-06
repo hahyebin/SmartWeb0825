@@ -18,7 +18,8 @@
 </head>
 <body>
 		<%
-			String userId = request.getParameter("userId");
+			request.setCharacterEncoding("UTF-8");
+		    String userId = request.getParameter("userId");
 			String userPw = request.getParameter("userPw");
 			String userName = request.getParameter("userName");
 		   
@@ -34,18 +35,18 @@
 		
 		%>
 
- <h2>가입되었습니다.</h2>
- <h3>가입내용 </h3>
- <p>가입 아이디 :  <%=userId %></p>
- <p>가입 비밀번호 : <%=userPw %></p>
- <p>가입 성명 : <%=userName %></p>
-  <button>탈퇴</button>
-<script>
-	$("button").on("click",function(){
-		alert("탈퇴되었습니다.");
-		location.href = "quiz05.jsp";
-		
-	})
+	 <h2>가입되었습니다.</h2>
+	 <h3>가입내용 </h3>
+	 <p>가입 아이디 :  <%=userId %></p>
+	 <p>가입 비밀번호 : <%=userPw %></p>
+	 <p>가입 성명 : <%=userName %></p>
+	  <button>탈퇴</button>
+	<script>
+		$("button").on("click",function(){
+			alert("탈퇴되었습니다.");
+			location.href = "quiz05.jsp";
+			
+		})
 
 </script>
 </body>

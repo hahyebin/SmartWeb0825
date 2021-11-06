@@ -9,19 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<%
-			request.setCharacterEncoding("utf-8");
-	
-	
-		
-   	%>
+		<%	request.setCharacterEncoding("utf-8");	%>
 	 ${param.num}의 절대값은 
 	 <c:set var ="num" value="${param.num}"> </c:set>
 	 <c:choose>
-	 	<c:when test="${ num > 0 }"> ${param.num}이다.</c:when>
-	 	<c:when test="${ num < 0 }"> ${param.num}
-	 		
-	 	</c:when>	
+	 	<c:when test="${ num-0 > 0 }"> ${param.num}이다.</c:when>
+	 	<c:when test="${ num-0 < 0 }"> ${param.num*-1}이다.</c:when>	
 	 </c:choose>
 </body>
 </html>

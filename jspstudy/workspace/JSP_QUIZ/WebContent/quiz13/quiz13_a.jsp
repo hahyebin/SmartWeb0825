@@ -14,8 +14,11 @@
 		<li> 국어 : ${param.kor} </li>
 		<li> 영어 : ${param.eng} </li>
 		<li> 수학 : ${param.mat} </li>
+		
+		<!-- 평균구하기 -->
 		<c:set var="avg" value="${ (param.kor +param.eng + param.mat) div 3}" />
 		<li> 평균 : ${avg} </li>
+		
 		<li> 학점 :
 		<c:choose>
 			<c:when test="${avg-90>=0}">A학점</c:when>
@@ -25,6 +28,7 @@
 			<c:otherwise>F학점</c:otherwise>
 		</c:choose>
 		</li>
+		
 		<li> 합격여부 : 
 			<c:if test="${avg-60>=0}">합격</c:if>
 			<c:if test="${avg-60<0}">불합격</c:if>

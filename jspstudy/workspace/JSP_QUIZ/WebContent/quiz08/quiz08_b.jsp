@@ -22,10 +22,10 @@
   	request.setAttribute("check", check);
   	
   	if( check.equals("agree") ){
-  		request.getRequestDispatcher("quiz08_c.jsp").forward(request,response);
+  		response.sendRedirect("quiz08_c.jsp");
   	}
   	if( check.equals("disagree") ){
-  		request.getRequestDispatcher("quiz08_d.jsp").forward(request,response);
+  		response.sendRedirect("quiz08_d.jsp");
   	}
   	
   

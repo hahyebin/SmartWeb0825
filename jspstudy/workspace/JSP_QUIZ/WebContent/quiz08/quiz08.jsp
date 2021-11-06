@@ -12,7 +12,7 @@
 <body>
 
 
-	<form action="quiz08_a.jsp">
+	<form action="quiz08_a.jsp" method="post">
 	<div>
 		<label for="userId">아이디&nbsp;&nbsp;&nbsp;</label>
 		<input type="text" name="userId" id="userId">

@@ -13,9 +13,7 @@
 
 	<%
 		request.setCharacterEncoding("utf-8");
-
 		String sport = request.getParameter("sport");
-	
 	     session.setAttribute("sport", sport);
      
 	%>

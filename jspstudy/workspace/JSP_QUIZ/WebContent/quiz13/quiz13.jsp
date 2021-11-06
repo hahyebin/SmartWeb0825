@@ -13,7 +13,9 @@
 	<label for="eng">영어 <input type="text" name="eng" class="reset"></label><br>
 	<label for="mat">수학 <input type="text" name="mat" class="reset"></label><br><br>
 	
-	<button>결과 보기</button>&nbsp;<input id="reset_btn" type="button" value="다시 작성">
+	<button>결과 보기</button>&nbsp;
+	<!-- input 타입이 reset인 경우 존재함... -->
+	<input id="reset_btn" type="button" value="다시 작성">
 </form>	
 <script>
 	$("#reset").on("click",function(){

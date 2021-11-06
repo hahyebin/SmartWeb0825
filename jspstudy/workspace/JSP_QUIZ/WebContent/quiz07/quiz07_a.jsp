@@ -11,9 +11,11 @@
 </head>
 <body>
 		<%
-			 String sport = request.getParameter("sport");
+			 
 		     String talent = request.getParameter("talent");
 		     String writer = request.getParameter("writer");
+		     
+		     // 세션은 브라우저가 닫힐 때까지 저장되기 때문에 request와 달리 hidden으로 데이터를 설정하지 않아도된다.
 		 	session.setAttribute("talent", talent);
 			session.setAttribute("writer", writer);
 	
@@ -22,8 +24,6 @@
 	<form action="quiz07_b.jsp">
 	<h2>2. 좋아하는 운동선수는누구인가요?</h2>
 		<input type="text" name="sport" >
-		<input type="hidden" name="talent"  value="<%=talent%>">
-		<input type="hidden" name="writer"  value="<%=writer%>">
 		<button>다음</button>
 	</form>
 	
