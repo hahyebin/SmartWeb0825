@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+<!--  namespace는 mapper의 전체 경로를 작성해 둔다.  -->
+<mapper namespace="mybatis.mapper.sqlmap">
+	
+	<!--  전체 게시판 조회 -->
+	<select id="selectList" resultType="dto.BoardDTO"  >
+		SELECT idx, writer, title, register 
+		  FROM board2
+		 ORDER BY idx DESC
+	</select>
+	
+	
+	
+	<!--  게시글 수  -->
+	<select id="getCount" resultType="Integer">
+		SELECT count(*) from board2
+	</select>
+	
+	
+	
+	<!-- 새 게시판  -->
+	 <insert id="insert" parameterType="dto.BoardDTO">
+	 	INSERT INTO 
+	       board2(idx, writer, title, register, content)  
+	    VALUES (board2_seq.nextval, #{writer}, #{title}, SYSDATE, #{content} ) 
+	 </insert>
+	
+	
+	<!-- 상세 게시판 -->
+	<select id="selectBoardByNum" parameterType="Long"  resultType="dto.BoardDTO" >
+		SELECT idx, writer, title, content
+	  	FROM board2
+		WHERE idx= #{idx}
+	</select>
+ 	
+ 	
+ 	
+	<!--  게시글 삭제  -->
+	<delete id="delete"  parameterType="Long"  >
+			DELETE
+			 FROM board2
+		WHERE idx= #{idx}
+	</delete>
+
+
+	<!-- 게시글 수정 -->
+	 <update id="update" parameterType="dto.BoardDTO">
+	 	UPDATE board2
+	 	  SET title = #{title}
+	 	    , content = #{content}
+	 	WHERE idx = #{idx}
+	 </update>
+	 
+
+
+</mapper>
