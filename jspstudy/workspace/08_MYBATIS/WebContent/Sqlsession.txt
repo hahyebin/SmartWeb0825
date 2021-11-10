@@ -1,0 +1,81 @@
+SqlSessionFactoryBuilder    sqlSessionFactory -> SqlSession( PreparedStatement    ResultSet  Connection  Sql)
+
+
+https://mybatis.org/mybatis-3/ko/getting-started.html
+
+mybatis.jar가 dbcp역할을 하기 때문에 dbcp.jar는 넣지 않음 
+
+
+
+
+java 에서  db테이블 저장하는 객체이름  DTO(data transfer object) or VO(value object)     + HashMap  
+
+DB : 데이터 줄게
+
+DAO : 일일이 담기 귀찮다. 딱 맞는 바구니에 담을 수 없을까?
+
+DAO : 아 유레카! 주는 데이터에 맞춰서 데이터 형식들을 만들어 놓은 클래스를 만들어야겠군 이름은 DTO라고 불러야겠다.
+
+ 
+
+DB 값 → DAO → Service → DTO
+
+HashMap 단점
+
+1. 해쉬 맵은 get이나 put에서의 key가 잘못돼도 컴파일 시에는 에러를 잡아내질 못함.
+     즉, map.put("names")라고 해도 에러가 나질 않죠.
+     반면에, dto.steNames() 나 dto.getNames()는 에러가 나서 컴파일조차 되지 않을 겁니다.
+
+ 
+
+2. 데이터 타입에 대한 에러를 잡아내질 못합니다.
+    String인지 Integer인지를 컴파일 시에는 모르죠.
+
+ 
+
+3. 해쉬 맵은 프로그램 말고도 별도의 정보가 필요합니다.
+    dto는 그 자체가 필요한 정보를 담고 있습니다.
+    name, address, age 등 dto의 정의만 봐도 대충은 알 수 있는데 반하여,
+    해쉬 맵은 이 데이터를 정의한 다른 문서가 필요합니다.
+    이는 규모가 큰 프로그램일수록 더 필요하죠.
+
+ 
+
+HashMap 장점 및 사용 이유
+1. 데이터의 필드들이 가변적인 경우
+2. 매우 복잡한 구조로 되어 있어 DTO로 규정하기는 곤란한 경우
+3. DTO가 너무나 많아지는 경우
+4. 한 select 문 쿼리에 여러 개의 count 정보를 담을 때
+5. 한번 쓸건데, 이걸 위해 DTO를 만들기도 뭐할 때
+
+
+
+-- mybatis 관련 블로그 
+https://khj93.tistory.com/entry/MyBatis-MyBatis%EB%9E%80-%EA%B0%9C%EB%85%90-%EB%B0%8F-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
