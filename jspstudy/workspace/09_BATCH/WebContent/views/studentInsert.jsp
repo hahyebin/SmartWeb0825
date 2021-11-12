@@ -91,7 +91,7 @@
 		function fnSnoCheck(){
 			let regSno = /^[0-9]{5}$/;
 			$("#sno").on('keyup blur',function(){
-				if ( regSno.test( $(this).val())  ){
+				if ( regSno.test( $(this).val())   ){
 					snoPass = true;
 				} else {
 					snoPass = false;
@@ -101,7 +101,7 @@
 		
 		// 국어 점수 체크 함수 ( 숫자가 아니고 0점 이하고 100점 이상이면 이동 못함 )
 		function fnKorCheck(){
-			if( isNaN($('#kor').val()) || $("#kor").val() < 0 || $("#kor").val() > 100  ){
+			if( isNaN($('#kor').val()) || $("#kor").val() < 0 || $("#kor").val() > 100 ||  $("#kor").val()==''  ){
 				korPass =false;
 			} else {
 				korPass = true;
@@ -109,7 +109,7 @@
 		}
 		// 영어 점수 체크 함수
 		function fnEngCheck(){
-			if(isNaN($('#eng').val()) || $("#eng").val() < 0 || $("#eng").val() > 100  ){
+			if(isNaN($('#eng').val()) || $("#eng").val() < 0 || $("#eng").val() > 100 ||  $("#eng").val()=='' ){
 				engPass =false;
 			} else {
 				engPass = true;
@@ -118,7 +118,7 @@
 				
 		// 수학 점수 체크 함수 
 		function fnMatCheck(){
-			if(isNaN($('#mat').val()) || $("#mat").val() < 0 || $("#mat").val() > 100  ){
+			if(isNaN($('#mat').val()) || $("#mat").val() < 0 || $("#mat").val() > 100 ||  $("#mat").val()=='' ){
 				matPass =false;
 			} else {
 				matPass = true;

@@ -50,9 +50,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE student
 		   SET name=#{name}, kor=#{kor}, eng=#{eng}, mat=#{mat}, ave=#{ave}, grade=#{grade}
 		 WHERE sno = #{sno}
-	</update>
+	</update>	
 	
+	<!--  8. Top3 -->
+	<select id="selectTop3List" resultType="dto.Student" >
+	  SELECT a.sno, a.name, a.kor, a.eng, a.mat, a.ave, a.grade
+		FROM (SELECT sno, name, kor, eng, mat, ave, grade 
+				FROM student
+			   ORDER BY ave DESC) a
+		WHERE <![CDATA[ROWNUM <=3 ]]>
+	</select>
 	
+	<!--  SELECT RANK() OVER(ORDER BY AVE DESC) 
+      			sno, name, kor, eng, mat, ave, grade
+  		  FROM student
+  		  <![CDATA[WHERE rownum < 4]]>  
+  		  
+  		   서브쿼리 넣는 이유 : 조건을 먼저 넣기 때문에 
+  		  	ROWNUM => 1번이 포함되면 사용가능하지만 1번이 포함되지 않으면 다른 사용을 해야함 
+  		  -->
+
 </mapper>
 
 

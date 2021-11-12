@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class DBService {
 	/* SqlSessionFactory */
-	private SqlSessionFactory factory;  // 오라클과 mybatis  연결하는 객체
+	private SqlSessionFactory factory;
 	public SqlSessionFactory getFactory() { return factory; }
 	
 	
