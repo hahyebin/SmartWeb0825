@@ -13,9 +13,14 @@ CREATE TABLE student
 
 -- NUMBER(5,2) --> 정수 3자리, 소수점자리 2자리
 
+		  
+	SELECT RANK() OVER(ORDER BY AVE DESC) 
+      		sno, name, kor, eng, mat, ave, grade
+  	  FROM student
+     WHERE ROWNUM < 4;
 
-
-
-
-
-
+	  SELECT a.sno, a.name, a.kor, a.eng, a.mat, a.ave, a.grade
+		FROM (SELECT sno, name, kor, eng, mat, ave, grade 
+				FROM student
+			   ORDER BY ave DESC) a
+		WHERE ROWNUM <=3;
