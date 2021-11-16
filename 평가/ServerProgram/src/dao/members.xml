@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.members">
+
+	<!--  1. 회원 전체 리스트 -->
+	<select id="selectList" resultType="dto.MemberDTO">
+	 SELECT no, id, name, grade, point
+	   FROM members
+	  ORDER BY no
+	</select>
+	
+	<!--  2. top  -->
+	<select id="selectTopList" resultType="dto.MemberDTO">
+	 SELECT	*
+	   FROM members
+	   WHERE point = (SELECT MAX(point) FROM members)
+	</select>
+	
+	
+	<!-- 3. 멤버확인 -->
+	<select id="select" resultType="dto.MemberDTO" parameterType="dto.MemberDTO">
+		SELECT	no, id, name, grade, point
+	     FROM members
+	    WHERE id=#{id} 
+	      AND name=#{name}
+	</select>
+	
+	<!-- 4. 회원가입 -->
+	<insert id="insert" parameterType="dto.MemberDTO">
+		INSERT INTO members
+	    VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{name}, 'bronze', 1000)
+	</insert>
+	
+	<!--  5. 회원 탈퇴 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM members
+		 WHERE no=#{no}
+	</delete>
+	
+	<!--  6. 회원 수정 -->
+	<update id="update" parameterType="dto.MemberDTO">
+		UPDATE members 
+		   SET name=#{name}, grade=#{grade}, point=#{point}
+		 WHERE no=#{no}
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
