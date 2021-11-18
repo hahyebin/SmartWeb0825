@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+<!--  namespace는 mapper의 전체 경로를 작성해 둔다.  -->
+<mapper namespace="dao.bBoard">
+	
+	<!-- 전체글 -->
+	<select id="selectlist" resultType="dto.bBoard">
+		SELECT idx, writer, title, content, category, readCount, register
+		FROM bboard
+		 ORDER BY idx DESC
+	</select>
+	
+	
+	<!--  게시글수 -->
+	<select id="getCount" resultType="int">
+		SELECT count(*)
+		FROM bboard
+	</select>
+	
+	<!--  글등록 -->
+	<insert id="insert" parameterType="dto.bBoard">
+		INSERT INTO bboard
+		VALUES(bboard_seq.nextval, #{writer}, #{title}, #{content}, #{category}, 0, SYSDATE)
+	</insert>
+		
+	<!--  상세보기  -->
+	<select id="select" parameterType="long" resultType="dto.bBoard">
+		SELECT  idx, title, writer, category, readCount, content, register
+		FROM bboard
+		WHERE idx=#{idx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hit" parameterType="long">
+		UPDATE bboard SET readCount=readCount+1 
+		WHERE idx=#{idx}
+	</update>
+	
+	<!-- 게시판 수정하기 -->
+	<update id="updateboard" parameterType="dto.bBoard">
+		UPDATE bboard 
+		   SET title=#{title}, content=#{content}
+		  WHERE idx=#{idx}
+	</update>
+	
+	<!-- 게시판 삭제하기 -->
+	<delete id="delete" parameterType="long">
+		DELETE FROM bboard WHERE idx=#{idx}
+	</delete>
+	
+	<!-- 게시판 저장하기  -->
+	<select id="AdminList"  resultType="dto.bBoard"  >
+		SELECT idx, writer, title, content, category,register
+			FROM bboard
+			where writer NOT IN('관리자')
+	</select>
+	
+</mapper>
