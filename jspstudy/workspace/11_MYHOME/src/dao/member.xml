@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.member">
+
+	<!--  1.  로그인 확인위해 매개변수에서 받은 id와 pw가 기존 테이블의 멤버와 비교해서 객체로 반환 + 중복체크하기 -->
+	<select id="selectMember" resultType="dto.Member" parameterType="dto.Member">
+		SELECT MNO, ID, PW, NAME, EMAIL, MDATE
+		  FROM MEMBER
+		 WHERE 1=1
+		 <if test="id != null">AND  ID=#{id}</if> 
+		 <if test="pw != null">AND  PW=#{pw}</if> 
+	</select>
+	
+	<!-- 2. 로그인 기록 남기기  매개변수는 String 타입인 id-->
+	<insert id="loginLog" parameterType="String">
+		INSERT INTO MEMBER_LOG
+        VALUES (MEMBER_LOG_SEQ.NEXTVAL, #{id}, SYSDATE)
+	</insert>
+	
+	<!-- 3. 회원가입 -->
+	<insert id="insertMember" parameterType="dto.Member">
+		INSERT INTO MEMBER
+		 VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{pw}, #{name}, #{email}, SYSDATE)
+	</insert>
+	
+	
+	
+	
+	
+</mapper>
