@@ -52,47 +52,70 @@ COMMIT
     1. 회원 : member
     2. 기록 : member_log 
 */
-
 DROP TABLE MEMBER_LOG;
 DROP TABLE MEMBER;
-
-CREATE TABLE MEMBER 
+CREATE TABLE MEMBER
 (
-	/* 회원 번호 */	 MNO	NUMBER,
-	/* 아이디 */	 ID		VARCHAR2(32) NOT NULL UNIQUE,
-	/* 비밀번호 */	 PW		VARCHAR2(32) NOT NULL,
-	/* 이름 */		 NAME 	VARCHAR2(50),
-	/* 메일 */		 EMAIL 	VARCHAR2(200),
-	/* 가입일 */ 	 MDATE 	DATE
+	/* 회원번호 */	MNO		NUMBER,
+	/* 아이디 */	ID		VARCHAR2(32) NOT NULL UNIQUE,
+	/* 비밀번호 */	PW		VARCHAR2(32) NOT NULL,
+	/* 이름 */		NAME	VARCHAR2(50),
+	/* 메일 */		EMAIL	VARCHAR2(200),
+	/* 가입일 */	MDATE	DATE
+);
+CREATE TABLE MEMBER_LOG
+(
+	/* 기록번호 */	LNO		NUMBER,
+	/* 아이디 */	ID		VARCHAR2(32),
+	/* 로그인일시 */LOGIN	DATE
 );
 
-CREATE TABLE MEMBER_LOG 
-(
-	/* 기록번호 */    LNO	  NUMBER,
-	/* 아이디 */	  ID 	  VARCHAR2(32),
-	/* 로그인일시 */  LOGIN	  DATE
-);
+ALTER TABLE MEMBER ADD CONSTRAINT MEMBER_PK PRIMARY KEY(MNO);
+ALTER TABLE MEMBER_LOG ADD CONSTRAINT MEMBER_LOG_PK PRIMARY KEY(LNO);
 
+ALTER TABLE MEMBER_LOG ADD CONSTRAINT MEMBER_LOG_MEMBER_FK
+	FOREIGN KEY(ID) REFERENCES MEMBER(ID) ON DELETE CASCADE;  /* 관련 로그 삭제 */
 
-/* 기본키 */
-ALTER TABLE MEMBER ADD CONSTRAINT MEMBER_PK PRIMARY KEY(MNO); 
-ALTER TABLE MEMBER_LOG ADD CONSTRAINT MEMBER_LOG_PK PRIMARY KEY(LNO); 
-
-/* 외래키->아이디에 유니크를 꼭 줘야지 가능함 외래키는 유니크한 열에만  가능  */
-ALTER TABLE MEMBER_LOG ADD CONSTRAINT MEMBER_LOG_MEMBER_FK 
-   FOREIGN KEY(ID) REFERENCES MEMBER(ID) ON DELETE CASCADE;
-
-/* 시퀀스 */
 DROP SEQUENCE MEMBER_SEQ;
 DROP SEQUENCE MEMBER_LOG_SEQ;
-
 CREATE SEQUENCE MEMBER_SEQ NOCACHE;
 CREATE SEQUENCE MEMBER_LOG_SEQ NOCACHE;
 
-
 INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'admin', '1111', '관리자', 'admin@myhome.com', SYSDATE);
-INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'scott', '1111', '스캇', 'scott@myhome.com', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'scott', '1111', '스콧', 'scott@myhome.com', SYSDATE);
 COMMIT
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+/* 
+    게층형 게시판 
+ 	자유게시판    
+ */
+DROP TABLE FREE;
+CREATE TABLE FREE
+(  
+	/* 글번호 */ 	   FNO 		      NUMBER,
+	/* 작성자 */ 	   WRITER		  VARCHAR2(32),
+	/* 내용 */	 	   CONTENT        VARCHAR2(4000),
+	/* IP */		   IP		  	  VARCHAR2(32),
+	/* 조회수 */       HIT            NUMBER,
+	/* 최초작성일*/    CREATED        DATE,
+	/* 최종수정일*/    LASTMODIFIED   DATE,
+	/* 삭제여부 */	   STATE		  NUMBER,  /* 정상: 0,    삭제된: -1 */
+	/* 게시글/댓글 */  DEPTH		  NUMBER,  /* 게시글: 0,  댓글 : 1이상 */
+	/* 동일그룹 */	   GROUPNO		  NUMBER,  /* 게시글: 글번호(FNO), 댓글: 게시글의 글번호(FNO)  */
+	/* 그룹내순서 */   GROUPORD		  NUMBER   /* 동일 그룹 내 표시 순서를 의미 */
+);
+
+DROP SEQUENCE FREE_SEQ;
+CREATE SEQUENCE FREE_SEQ NOCACHE;
+
+/* 기본키 */
+ALTER TABLE FREE ADD CONSTRAINT FREE_PK PRIMARY KEY(FNO);
+
+
+
 
 
 
