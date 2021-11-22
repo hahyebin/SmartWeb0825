@@ -42,7 +42,6 @@ public class NoticeUpdateService implements NoticeService {
 			out.println("</script>");
 			out.close();
 		}
-		
 		return null;
 	}
 

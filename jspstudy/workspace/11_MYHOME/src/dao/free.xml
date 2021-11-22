@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.free">
+
+	<!--  1. 자유게시판 리스트 -->
+	<select id="selectFreeList" resultType="dto.Free">
+		SELECT FNO, WRITER, CONTENT, IP, HIT, CREATED, LASTMODIFIED, STATE, DEPTH, GROUPNO, GROUPORD
+		  FROM FREE
+	</select>
+	
+	
+	<!--  2. 총 게시물 수 -->
+	<select id="selectTotalCount" resultType="int" >
+		SELECT count(*)
+		  FROM FREE
+	</select>
+	
+	<!--  3. 새글등록 -->
+	<insert id="insertFree" parameterType="dto.Free">
+		INSERT INTO FREE
+		VALUES (
+			    FREE_SEQ.NEXTVAL, 
+			    #{writer}, 
+			    #{content},
+			    #{ip},
+			    0,				<!-- hit -->
+			    SYSDATE,		<!-- created -->
+			    SYSDATE, 		<!-- lastModified -->
+				0,				<!-- state -->
+				0,				<!-- depth -->
+				FREE_SEQ.CURRVAL,
+				0				<!-- groupOrd -->
+			)
+	</insert>
+	
+	<!-- 4. 상세보기 -->
+	<select id="selectFreeByfNo" parameterType="Long" resultType="dto.Free">
+		SELECT  FNO, WRITER, CONTENT, IP, HIT, CREATED, LASTMODIFIED, STATE, DEPTH, GROUPNO, GROUPORD
+		  FROM FREE
+		 WHERE FNO=#{fNo}
+	</select>
+	
+	
+	<!--  5. 조회수 -->
+	<update id="updateHit" parameterType="Long">
+		UPDATE FREE
+	   	   SET HIT=HIT+1
+		 WHERE FNO=#{fNo}
+	</update>
+	
+	
+	<!--  6. 수정하기 -->
+	<update id="updateFree" parameterType="dto.Free">
+	 	UPDATE FREE
+	 	   SET CONTENT=#{content}, LASTMODIFIED=SYSDATE
+	 	 WHERE FNO=#{fNo} 
+	</update>
+	
+	
+	
+	
+</mapper>

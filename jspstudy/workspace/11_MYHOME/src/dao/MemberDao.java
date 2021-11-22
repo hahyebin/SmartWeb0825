@@ -47,5 +47,25 @@ public class MemberDao {
 	}
 	
 	
+	// 4. 탈퇴(회원번호 필요)
+	public int deleteMember(Long mNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("dao.member.deleteMember", mNo);
+		if(result > 0 ) ss.commit();
+		ss.close();
+		return result;
+	}
+	
+	// 5. 로그 삭제 (아이디로)
+	public int deleteMemberLog(String id) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("dao.member.deleteMemberLog", id);
+		if(result > 0 ) ss.commit();
+		ss.close();
+		return result;
+	}
+	
+	
+	
 	
 }// end of class

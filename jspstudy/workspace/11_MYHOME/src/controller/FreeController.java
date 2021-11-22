@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,25 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.ModelAndView;
-import service.member.MemberIdCheckService;
-import service.member.MemberJoinService;
-import service.member.MemberLeaveService;
-import service.member.MemberLoginService;
-import service.member.MemberLogoutService;
-import service.member.MemberService;
-import service.notice.NoticeService;
-import service.reply.ReplyInsertService;
-import service.reply.ReplyService;
+import service.free.FreeInsertService;
+import service.free.FreeListService;
+import service.free.FreeService;
+import service.free.FreeUpdateService;
+import service.free.FreeViewService;
 
 
-@WebServlet("*.member")
-public class MemberController extends HttpServlet {
+@WebServlet("*.free")
+public class FreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
  
-    public MemberController() {
+    public FreeController() {
         super();
-    
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,30 +33,30 @@ public class MemberController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length()+1);
 	
-				
-		MemberService service = null;
+		FreeService service = null;
 		ModelAndView mav = null;
 		
 		switch(command) {
-		case "login.member":                          // 로그인 - 세션 저장
-			service = new MemberLoginService();
+		case "list.free":
+			service = new FreeListService();
 			break;
-		case "logout.member":                         // 로그아웃 - 세션 삭제
-			service = new MemberLogoutService();
+		case "insertForm.free":
+			mav = new ModelAndView("free/insert.jsp", false);
 			break;
-		case "joinForm.member":                        // 회원가입 controller 통해 이동
-			mav = new ModelAndView("member/join.jsp", false);
+		case "insert.free":
+			service = new FreeInsertService();
 			break;
-		case "join.member":                            // 회원가입
-			service = new MemberJoinService();
+		case "view.free":
+			service = new FreeViewService();
 			break;
-		case "idCheck.member":                         // 회원가입시 사용할 아이디 중복  체크
-			service = new MemberIdCheckService();
+		case "updateForm.free":
+			mav = new ModelAndView("free/update.jsp", false);     // redirect 불가능 (f의 fno와 content가지고 가므로)
 			break;
-		case "leave.member":						   // 탈퇴 서비스 + 로그 삭제 + 세션 삭제 
-			service = new MemberLeaveService();
+		case "update.free":
+			service = new FreeUpdateService();
 			break;
 		}
+		
 		
 		// service 가 사용되지 않은 경우 (단순 이동) service 실행이 불가능 
 		if (service != null ) {
@@ -81,10 +76,7 @@ public class MemberController extends HttpServlet {
 			response.sendRedirect(mav.getView());
 		} else {
 			request.getRequestDispatcher(mav.getView()).forward(request, response);
-		}
-				
-
-		
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

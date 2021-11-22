@@ -35,12 +35,9 @@ public class NoticeViewService implements NoticeService {
 			NoticeDao.getInstance().updateNoticeHit(nNo);
 		}
 		
-		
-		
 		// 게시글 번호와 일치하는 공지사항을 가져 옴
 		Notice notice = NoticeDao.getInstance().selectNoticeView(nNo);
-	
-	
+
 		// 일치하는 공지사항이 있는 경우  
 		if(notice != null ) {
 						
