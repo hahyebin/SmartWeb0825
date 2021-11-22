@@ -8,11 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Welcome</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		if(confirm('jdbc 확인으로 이동')){
-			location.href = 'index_jdbc.jsp';
-		}
-	</script>
+
 	<style>
 		* {
 			padding: 0;
@@ -56,7 +52,7 @@
 		// 전체 게시판 리스트 ajax 함수
 		function fnSelectBoardList(){	
 			$.ajax({
-				url :'selectBoardList.do',
+				url :'selectBoardList.jdbc',
 				type: 'get',
 				// data : 보내는 파라미터 
 				dataType: 'json',
@@ -81,7 +77,6 @@
 			}) // ajax	
 		}
 		
-
 		// 게시판 등록 ajax 함수
 		function fnInsertBoard(){
 			
@@ -92,7 +87,7 @@
 				}
 			    //	$.ajax({})  == JQuery.ajax({});
 				$.ajax({        
-					url : "insertBoard.do",
+					url : "insertBoard.jdbc",
 					type: 'post',
 					data : $('#f').serialize(),   // 폼의 모든 요소를 파라미터로 보냄.
 					dataType: 'json',
@@ -103,8 +98,8 @@
 					// xhr.status 상태코드 
 					// xhr.responseText -> 서버에서 보낸 오류텍스트 받기
 					error: function(xhr){   // 응답 텍스트는 xhr 객체에 responseText 프로퍼티로 전달됨  
-					  if(xhr.status == 1111 ){    // response.setStatus(1111); 코드로 보낸 값을 받음 
-							alert(xhr.responseText);
+					  if(xhr.status == 2001 || xhr.status == 2002 || xhr.status == 2003 ){    // 
+						  alert(xhr.status +": "+xhr.responseText);
 					  }
 					}			
 				}); // ajax
@@ -117,7 +112,7 @@
 			
 				if(confirm('삭제할까요?')){
 					$.ajax({
-						url: "deleteBoard.do",
+						url: "deleteBoard.jdbc",
 						type: 'get',                   // 번호 하나 전달시 get 사용
 						data: 'bNo=' + $(this).prev().val(),
 						dataType: 'json',
@@ -133,16 +128,11 @@
 							alert('실패');
 						}
 					})//ajax
-				} // confirm
-					
-					
-				
+				} // confirm	
 			}); // click
 		}
-	
 	</script>
 </head>
-
 <body>
 	<div class="wrap">
 		<div class="input_area">

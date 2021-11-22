@@ -31,9 +31,6 @@ class BoardTestCase {
 		 assertEquals(1, result, "삭제오류");	
 	 }
 	
-	 
-	 
-	
     // 이 메소드는 JUnit 테스트 할 때 실행되는 메소드이다.
 	//@Test 
 	void 게시글목록가져오기_테스트() {   // 테스트 코드 메소드명은 "한글"로 해도 된다.	
