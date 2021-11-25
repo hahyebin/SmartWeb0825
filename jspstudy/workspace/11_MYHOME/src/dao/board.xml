@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.board">
+
+	<!-- 1. 이미지 등록 -->
+	<insert id="insertBoard" parameterType="dto.Board">
+		INSERT INTO BOARD 
+		VALUES ( BOARD_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{fileName}, #{saveName}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<!--  2. 전체리스트 -->
+	<select id="selectBoardList" resultType="dto.Board">
+		SELECT BNO, WRITER, TITLE, CONTENT, FILENAME, SAVENAME, CREATED, LASTMODIFIED
+		  FROM BOARD
+		 ORDER BY BNO DESC
+	</select>
+	
+	<!-- 3. 상세보기 -->
+	<select id="selectBoardView" parameterType="Long" resultType="dto.Board">
+		SELECT BNO, WRITER, TITLE, CONTENT, FILENAME, SAVENAME, CREATED, LASTMODIFIED
+		  FROM BOARD
+		 WHERE BNO=#{bNo}
+	</select>
+	
+	
+	
+</mapper>

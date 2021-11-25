@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.ModelAndView;
 import service.notice.NoticeDeleteService;
+import service.notice.NoticeFindService;
 import service.notice.NoticeInsertService;
 import service.notice.NoticeListService;
 import service.notice.NoticeService;
@@ -64,13 +65,16 @@ public class NoticeController extends HttpServlet {
 			service = new NoticeInsertService();
 			break;
 		case "updateForm.notice":
-			mav = new ModelAndView("notice/update.jsp", false);     // 수정입력할수있는곳으로 세션에 저장되어있으므로 데이터 직접 입력 안되도 됨
+			mav = new ModelAndView("notice/update.jsp", false);     // 수정입력할수있는곳으로 세션에 저장되어있으므로 데이터 직접 입력 안해도 됨
 			break;
 		case "update.notice":
 			service = new NoticeUpdateService();
 			break;
 		case "delete.notice":
 			service = new NoticeDeleteService();
+			break;
+		case "find.notice":
+			service = new NoticeFindService();
 			break;
 		}
 		

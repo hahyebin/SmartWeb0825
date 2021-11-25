@@ -1,12 +1,14 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import dto.Notice;
 import mybatis.config.DBService;
+import oracle.net.aso.f;
 
 // data access object  -> 데이터 접근 객체 
 public class NoticeDao {
@@ -32,12 +34,22 @@ public class NoticeDao {
 	// SqlSession 각 스레드는 자체적으로  SqlSession 인스턴스를 가짐(공유x) -> static 지정 불가 -> SqlSession은 thread-safe에 속해있지 않기 때문이다.
 	
 	// 1. 전체 목록 리스트
-	public List<Notice> selectNoticeList(){
+	public List<Notice> selectNoticeList(Map<String,Integer> map){
 		SqlSession ss = factory.openSession();
-		List<Notice> list = ss.selectList("dao.notice.selectNoticeList");
+		List<Notice> list = ss.selectList("dao.notice.selectNoticeList", map);
 		ss.close();
 		return list;
 	}
+	
+	
+	// 공지사항 수 구하기
+	public int selectTotalCount() {
+		SqlSession ss = factory.openSession();
+		int totalCount = ss.selectOne("dao.notice.selectTotalCount");
+		ss.close();
+		return totalCount;
+	}
+	
 	
 	// 2. 공지사항 숫자를 받아서 한 공지사항 객체를 갖고옴!
 	public Notice selectNoticeView(Long nNo) {
@@ -84,6 +96,22 @@ public class NoticeDao {
 		return result;
 	}
 	
+	
+	// *******************   7. 검색  ************************
+	public List<Notice> findNotice(Map<String, String> map){
+		SqlSession ss = factory.openSession();
+		List<Notice> list = ss.selectList("dao.notice.findNotice", map);
+		ss.close();
+		return list;
+	}
+	
+	// *******************   8. 검색 => 게시물 수 **********************
+	public int selectFindCount(Map<String, String> map) {
+		SqlSession ss = factory.openSession();
+		int findCount = ss.selectOne("dao.notice.selectFindCount", map);
+		ss.close();
+		return findCount;
+	}
 	
 	
 	

@@ -5,10 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dao.free">
 
-	<!--  1. 자유게시판 리스트 -->
-	<select id="selectFreeList" resultType="dto.Free">
-		SELECT FNO, WRITER, CONTENT, IP, HIT, CREATED, LASTMODIFIED, STATE, DEPTH, GROUPNO, GROUPORD
-		  FROM FREE
+	<!--  1. 자유게시판 리스트 + 페이지 정렬 + 댓글 삽입후 순서설정 정렬  -->
+	<select id="selectFreeList" resultType="dto.Free" parameterType="Map">
+		SELECT B.RN, B.FNO, B.WRITER, B.CONTENT, B.IP, B.HIT, B.CREATED, B.LASTMODIFIED, B.STATE, B.DEPTH, B.GROUPNO, B.GROUPORD
+ 		  FROM  ( SELECT ROWNUM AS RN, A.FNO, A.WRITER, A.CONTENT, A.IP, A.HIT, A.CREATED, A.LASTMODIFIED, A.STATE, A.DEPTH, A.GROUPNO, A.GROUPORD
+                    FROM ( SELECT FNO, WRITER, CONTENT, IP, HIT, CREATED, LASTMODIFIED, STATE, DEPTH, GROUPNO, GROUPORD
+                             FROM FREE
+                             ORDER BY GROUPNO DESC,  GROUPORD ASC) A ) B
+   		 WHERE   B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
 	
 	
@@ -59,7 +63,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 WHERE FNO=#{fNo} 
 	</update>
 	
+	<!--  7. 삭제하기  게시글 번호를 받아 state수정 ->삭제버튼이지만 실 삭제가 아니라 스테이트 값을 변경함 -->
+	<update id="deleteFree" parameterType="Long">
+		UPDATE FREE
+		   SET STATE = -1
+		 WHERE FNO=#{fNo}
+	</update>
 	
 	
+	<!-- ************************************************************************************************************** -->
+
+	<!--  8. 댓글 관련 : 삽입  -->
+	<insert id="insertReply" parameterType="dto.Free">
+		INSERT INTO FREE
+		VALUES (
+			    FREE_SEQ.NEXTVAL, 
+			    #{writer}, 
+			    #{content},
+			    #{ip},
+			    0,				<!-- hit -->
+			    SYSDATE,		<!-- created -->
+			    SYSDATE, 		<!-- lastModified -->
+				0,				<!-- state -->
+				#{depth},		<!-- depth -->
+				#{groupNo},		<!-- groupNo -->
+				#{groupOrd}		<!-- groupOrd -->
+			)
+	</insert>
+
+	<!--  9. 댓글 관련 : 댓글 정렬 쿼리  -->
+	<update id="updatePreviousReplyGroupOrd"  parameterType="dto.Free">
+		UPDATE FREE
+		   SET GROUPORD = GROUPORD+1
+		 WHERE GROUPNO = #{groupNo}       <!--  같은 groupNo 인가? -->
+		   AND GROUPORD > #{groupOrd}     <!--  원글의 groupOrd 보다 큰 댓글인가? -->
+	</update>
+
+
+
+	<!--  10. 검색관련(가장 먼저 조건 주기!!)  + 삭제된 검색글(STATE=1)은 안나오게  + 페이징 처리 -->
+	<select id="findFree" parameterType="Map" resultType="dto.Free">
+		SELECT B.RN, B.FNO, B.WRITER, B.CONTENT, B.IP, B.HIT, B.CREATED, B.LASTMODIFIED, B.STATE, B.DEPTH, B.GROUPNO, B.GROUPORD
+ 		  FROM  ( SELECT ROWNUM AS RN, A.FNO, A.WRITER, A.CONTENT, A.IP, A.HIT, A.CREATED, A.LASTMODIFIED, A.STATE, A.DEPTH, A.GROUPNO, A.GROUPORD
+                    FROM ( SELECT FNO, WRITER, CONTENT, IP, HIT, CREATED, LASTMODIFIED, STATE, DEPTH, GROUPNO, GROUPORD
+                             FROM FREE
+                            WHERE STATE = 0  
+                              AND  <if test="column != 'ALL'">${column} LIKE #{query}</if>
+		  	    		   		   <if test="column == 'ALL'">( WRITER LIKE #{query} OR CONTENT LIKE #{query} )</if>
+                            ORDER BY GROUPNO DESC,  GROUPORD ASC) A ) B
+   		 WHERE  B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+
+
+	<!--  11. 검색관련  : 검색 수 + 삭제된 글(STATE=1) 포함안함  => 검색 관련 조건은 가장 먼저 주는 것 -->
+	<select id="selectFindCount" resultType="int" parameterType="Map">
+		SELECT COUNT(*)
+		  FROM FREE
+	 	 WHERE STATE = 0 
+	 	   AND <if test="column != 'ALL'">${column} LIKE #{query}</if>
+		  	   <if test="column == 'ALL'">(WRITER LIKE #{query} OR CONTENT LIKE #{query})</if>
+	</select>
+
+
+
+
+
+
+
+
 	
 </mapper>

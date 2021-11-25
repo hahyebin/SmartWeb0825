@@ -27,7 +27,6 @@ public class ReplyInsertService implements ReplyService {
 		reply.setnNo(nNo);
 		reply.setIp(ip);
 		
-		
 		int result = ReplyDao.getInstance().insertReply(reply);
 		
 		if (result > 0) {

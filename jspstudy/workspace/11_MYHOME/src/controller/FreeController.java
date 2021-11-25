@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.ModelAndView;
+import service.free.FreeDeleteService;
+import service.free.FreeFindService;
 import service.free.FreeInsertService;
 import service.free.FreeListService;
 import service.free.FreeService;
 import service.free.FreeUpdateService;
 import service.free.FreeViewService;
+import service.free.ReplyInsertService;
 
 
 @WebServlet("*.free")
@@ -55,6 +58,16 @@ public class FreeController extends HttpServlet {
 		case "update.free":
 			service = new FreeUpdateService();
 			break;
+		case "delete.free":
+			service = new FreeDeleteService();
+			break;
+		case "insertReply.free":                              // 댓글 삽입 서비스
+			service = new ReplyInsertService();
+			break;
+		case "find.free":									  // 검색 서비스
+			service = new FreeFindService();
+			break;
+		
 		}
 		
 		
@@ -66,6 +79,7 @@ public class FreeController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 		// mav가 null인 경우
 		// 1. Model(Service)에서 응답으로 이동하는 겨우 
 		// 2. Model(Service)가 ajax 응답을 하는 경우
