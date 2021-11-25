@@ -14,14 +14,35 @@
 
 </head>
 <body>
-
+	<header>
+		<h1>공지사항</h1>
+	</header>
 	
+	<hr>
+	
+	<!-- 검색란 -->
+	<form action="find.notice">
+		<!-- ********** option의 value를 DB칼럼명으로 직접 사용함. **********-->
+		<select name="column">
+			<option value="WRITER">작성자</option>
+			<option value="TITLE">제목</option>
+			<option value="CONTENT">내용</option>
+			<option value="ALL">작성자+제목+내용</option>
+		</select>
+		<input type="text" name="query">
+		<button>검색</button>
+		<input type="button"  value="전체보기" onclick="location.href='list.notice'">
+	</form>
+
 	<c:if test="${loginUser.id == 'admin'}">
 		<div>
 			<a href="insertForm.notice">공지사항 작성하기</a>
 		</div>
 	</c:if>
-	<table border="1">
+	
+	
+	<table border="1" id="list_wrap">
+		<caption>공지수 : ${totalRecord}</caption>
 		<thead>
 			<tr>
 				<td>순번</td>
@@ -36,9 +57,9 @@
 				<tr><td colspan="5">게시물이 없습니다.</td></tr>
 			</c:if>
 			<c:if test="${not empty list}">
-				<c:forEach var="notice" items="${list}">
+				<c:forEach varStatus="s"  var="notice" items="${list}" >
 					<tr>
-						<td>${notice.nNo}</td>
+						<td>${startNum - s.index}</td>     <!-- 순서대로 표시되는 순번(게시글 번호와 상관 없음) -->
 						<td><a href="view.notice?nNo=${notice.nNo}">${notice.title}</a></td>
 						<td>${notice.writer}</td>
 						<td>${notice.hit}</td>
@@ -46,10 +67,12 @@
 					</tr>
 				</c:forEach>
 			</c:if>
-			
-		
-		
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5">${pageEntity}</td>
+			</tr>
+		</tfoot>
 	</table>
 </body>
 </html>

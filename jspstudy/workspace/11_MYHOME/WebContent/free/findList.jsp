@@ -55,16 +55,11 @@
 	  }
 	  table tr td:last-of-type {
 	   text-align:center;
-	  }
-	  table tr {  height : 30px;  }
-	#search_wrap{
+	}
+	#search_wrap {
 		width: 600px;
 		text-align : left;
 		margin: 20px auto;
-	}
-	#search_wrap form {
-		display : block;
-		margin-left: 45px;
 	}
 	
 	 
@@ -88,7 +83,6 @@
    <main>
    
 	
-		
    
 	<!-- 작성 링크 -->
 	<div id="insertFrom_wrap">
@@ -96,6 +90,9 @@
 			<a href="insertForm.free">새글작성</a>
 		</c:if>
 	</div>
+	
+	
+
 	
 	<!-- 목록 -->
 	<span class="totalrecord">전체 게시글 : ${totalRecord}개</span><br>
@@ -154,7 +151,7 @@
 															return false;
 														}
 														return true;
-													});
+													})
 												}
 											</script>
 									</c:if>
@@ -195,7 +192,7 @@
 					</c:if>
 					<!-- 첫 페이지가 아닐때는 클릭하면 첫번째 페이지로 이동 -->
 					<c:if test="${p.page != 1}">
-						<a href="list.free?page=1">◀◀</a>&nbsp;&nbsp;
+						<a href="find.free?column=${column}&query=${query}&page=1">◀◀</a>&nbsp;&nbsp;
 					</c:if>
 					
 					<!--  이전 블록으로 이동 : 1블록은 링크가 필요 없다.  -->
@@ -204,14 +201,16 @@
 					</c:if>
 					<!--  이전 블록으로 이동 : 2블록부터는 링크가 필요하다.  -->
 					<c:if test="${p.page > p.pagePerBlock}">
-						<a href="list.free?page=${p.beginPage-1}">◀</a>&nbsp;&nbsp;
+						<a href="find.free?column=${column}&query=${query}&page=${p.beginPage-1}">◀</a>&nbsp;&nbsp;
 					</c:if>
 					
 					<!--  페이지 번호 : 현재 페이지는 링크가 필요 없다. -->
 					<c:forEach var="i" begin="${p.beginPage}" end="${p.endPage}">
-						<c:if test="${p.page == i}">&nbsp;${i}&nbsp;</c:if>
+						<c:if test="${p.page == i}">
+							${i}					
+						</c:if>
 						<c:if test="${p.page != i}">
-							<a href="list.free?page=${i}">&nbsp;${i}&nbsp;</a>					
+							<a href="find.free?column=${column}&query=${query}&page=${i}">${i}</a>					
 						</c:if>
 					</c:forEach>
 					
@@ -221,7 +220,7 @@
 						&nbsp;&nbsp;▶
 					</c:if>
 					<c:if test="${p.endPage != p.totalPage}">
-						&nbsp;&nbsp;<a href="list.free?page=${p.endPage+1 }">▶</a>
+						&nbsp;&nbsp;<a href="find.free?column=${column}&query=${query}&page=${p.endPage+1 }">▶</a>
 					</c:if>
 					
 					<!-- 마지막 페이지로 이동 : 마지막 페이지는 링크가 필요 없다. -->
@@ -229,8 +228,10 @@
 						&nbsp;&nbsp;▶▶
 					</c:if>
 					<c:if test="${p.page != p.totalPage}">
-						&nbsp;&nbsp;<a href="list.free?page=${p.totalPage}">▶▶</a>
-					</c:if>						
+						&nbsp;&nbsp;<a href="find.free?column=${column}&query=${query}&page=${p.totalPage}">▶▶</a>
+					</c:if>
+					
+											
 				</td>
 			</tr>
 		</tfoot>
@@ -241,16 +242,19 @@
    	<div id="search_wrap">
 		<form action="find.free" >
 		<!-- ********** option의 value를 DB칼럼명으로 직접 사용함. **********-->
-			<select name="column"  style="height:30px;">
+			<select name="column">
 				<option value="WRITER">작성자</option>
 				<option value="CONTENT">내용</option>
 				<option value="ALL">작성자+내용</option>
 			</select>
-			<input type="text" name="query"  style="width:300px; height:30px;">
+			<input type="text" name="query" style="width:300px">
 			<button>검색</button>
 			<input type="button"  value="전체보기" onclick="location.href='list.free'">
 		</form>
 	</div>	
+		
+	
+	
 	
 	
 	</main>

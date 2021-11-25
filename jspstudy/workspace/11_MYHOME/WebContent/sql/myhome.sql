@@ -89,7 +89,7 @@ COMMIT
 
 ------------------------------------------------------------------------------------------------------------------------------
 /* 
-    게층형 게시판 
+    계층형 게시판 
  	자유게시판    
  */
 DROP TABLE FREE;
@@ -103,8 +103,8 @@ CREATE TABLE FREE
 	/* 최초작성일*/    CREATED        DATE,
 	/* 최종수정일*/    LASTMODIFIED   DATE,
 	/* 삭제여부 */	   STATE		  NUMBER,  /* 정상: 0,    삭제된: -1 */
-	/* 게시글/댓글 */  DEPTH		  NUMBER,  /* 게시글: 0,  댓글 : 1이상 */
-	/* 동일그룹 */	   GROUPNO		  NUMBER,  /* 게시글: 글번호(FNO), 댓글: 게시글의 글번호(FNO)  */
+	/* 게시글/댓글 */  DEPTH		  NUMBER,  /* 게시글: 0,  댓글 : 1이상(원글의 DEPT+1) */
+	/* 동일그룹 */	   GROUPNO		  NUMBER,  /* 게시글: 글번호(FNO), 댓글: 원글의 글번호(FNO)  */
 	/* 그룹내순서 */   GROUPORD		  NUMBER   /* 동일 그룹 내 표시 순서를 의미 */
 );
 
@@ -116,6 +116,52 @@ ALTER TABLE FREE ADD CONSTRAINT FREE_PK PRIMARY KEY(FNO);
 
 
 
+/*************************************************************************************************************************************************************/
+
+/* 
+ 	이미지 게시판 
+ 	1. 이미지 게시판 : BOARD
+ 	2. 댓글 : COMMENT 
+ */
+
+DROP TABLE COMMENTS;
+DROP TABLE BOARD;
+CREATE TABLE BOARD
+(
+	/* 게시글번호 */  	  BNO	    	NUMBER,
+	/* 작성자 */	  	  WRITER    	VARCHAR2(32),	
+	/* 제목 */		  	  TITLE			VARCHAR2(2000) NOT NULL,
+	/* 내용 */		  	  CONTENT       VARCHAR2(4000),
+	/* 올린 파일명 */     FILENAME    VARCHAR2(300),
+	/* 저장된 파일명 */   SAVENAME      VARCHAR2(300),
+	/* 작성일자 */		  CREATED       DATE,
+	/* 최종수정일 */	  LASTMODIFIED  DATE
+);
+
+CREATE TABLE COMMENTS
+(
+	/* 댓글번호 */ 		 CNO 		NUMBER,
+	/* 작성자 */		 WRITER     VARCHAR2(32),
+	/* 내용 */			 CONTENT    VARCHAR2(4000),
+	/* 원글 번호 */		 BNO		NUMBER,
+	/* 삭제여부 */		 STATE      NUMBER,	
+	/* 작성일자 */		 CREATED    DATE
+);
+
+/* 시퀀스 */
+DROP SEQUENCE BOARD_SEQ;
+DROP SEQUENCE COMMENTS_SEQ;
 
 
+CREATE SEQUENCE BOARD_SEQ NOCACHE;
+CREATE SEQUENCE COMMENTS_SEQ NOCACHE;
+
+/* 기본키 외래키 (회원들과 연결하고 싶은 경우엔 MEMBER의 ID와  BOARD, COMMENT의 WRITER를 연결한다.) */
+ALTER TABLE BOARD ADD CONSTRAINT BOARD_PK PRIMARY KEY(BNO);
+ALTER TABLE COMMENTS ADD CONSTRAINT COMMENTS_PK PRIMARY KEY(CNO);
+ALTER TABLE COMMENTS ADD CONSTRAINT COMMENTS_BOARD_FK FOREIGN KEY(BNO) REFERENCES BOARD(BNO) ON DELETE CASCADE;
+
+
+ALTER TABLE BOARD ADD CONSTRAINT BOARD_MEMBER_FK FOREIGN KEY(WRITER) REFERENCES MEMBER(ID) ON DELETE CASCADE;
+ALTER TABLE COMMENTS ADD CONSTRAINT COMMENTS_MEMBER_FK FOREIGN KEY(WRITER) REFERENCES MEMBER(ID) ON DELETE CASCADE;
 
