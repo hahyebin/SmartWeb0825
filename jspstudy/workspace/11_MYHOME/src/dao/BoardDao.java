@@ -1,12 +1,12 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import dto.Board;
-import dto.Reply;
 import mybatis.config.DBService;
 
 public class BoardDao {
@@ -33,10 +33,19 @@ public class BoardDao {
 		return result;
 	}
 	
-	// 2. 전체이미지
-	public List<Board> selectBoardList(){
+	// 전체이미지 수 
+		public int selectTotalCount(){
 		SqlSession ss = factory.openSession();
-		List<Board> list = ss.selectList("dao.board.selectBoardList");
+		int totalRecord = ss.selectOne("dao.board.selectTotalCount");
+		ss.close();
+		return totalRecord;
+	}
+	
+	
+	// 2. 전체이미지
+	public List<Board> selectBoardList(Map<String,Integer> map){
+		SqlSession ss = factory.openSession();
+		List<Board> list = ss.selectList("dao.board.selectBoardList", map);
 		ss.close();
 		return list;
 	}
@@ -49,6 +58,22 @@ public class BoardDao {
 		return board;
 	}
 	
+	// 4. 삭제하기
+	public int deleteBoard(Long bNo) {
+		SqlSession ss= factory.openSession(false);
+		int result = ss.delete("dao.board.deleteBoard", bNo);
+		if(result>0) ss.commit();
+		ss.close();
+		return result;
+	}
 	
+	// 5. 수정하기
+	public int updateBoard(Board board) {
+		SqlSession ss= factory.openSession(false);
+		int result = ss.update("dao.board.updateBoard", board);
+		if(result>0) ss.commit();
+		ss.close();
+		return result;
+	}
 	
 }// end of class

@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import dto.Notice;
 import mybatis.config.DBService;
-import oracle.net.aso.f;
 
 // data access object  -> 데이터 접근 객체 
 public class NoticeDao {

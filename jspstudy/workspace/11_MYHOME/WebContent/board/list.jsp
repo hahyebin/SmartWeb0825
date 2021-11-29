@@ -14,12 +14,9 @@
 			margin-top: 20px;
 			border-collapse: collapse; 
 		}
-		
 	</style>
-
 </head>
 <body>
-	
 	<div>
 		<c:if test="${loginUser != null }">
 			<a href="insertForm.board">새 이미지게시글 작성하기</a>
@@ -39,12 +36,12 @@
 			<c:if test="${empty list}">
 				<tr>		
 					<td colspan="4">저장된 이미지가 없습니다.</td>
-			  </tr>
+			    </tr>
 			</c:if>
 			<c:if test="${not empty list}">
-			 <c:forEach items="${list}"  var="board">
+			 <c:forEach items="${list}"  var="board" varStatus="vs">
 				<tr>
-					<td>${board.bNo}</td>
+					<td>${startNum - vs.index}</td>
 					<td><a href="view.board?bNo=${board.bNo}">${board.title}</a></td>
 					<td>${board.writer}</td>
 					<td>${board.created}</td>
@@ -52,10 +49,11 @@
 				</c:forEach>
 			</c:if>
 		</tbody>
-	
-	
+		<tfoot>
+			<tr>
+				<td colspan="4">${pageEntity}</td>			
+			</tr>
+		</tfoot>
 	</table>
-	
-	
 </body>
 </html>

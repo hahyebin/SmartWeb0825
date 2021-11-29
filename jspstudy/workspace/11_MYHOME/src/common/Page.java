@@ -34,7 +34,7 @@ public class Page {
 	public void setPageEntity(int totalRecord, int page) {    // (전체 게시글 수, 현재 페이지)
 		
 		this.totalRecord = totalRecord;
-		this.beginPage = page;
+		this.page = page;
 		
 		// totalPage 전체 페이지 수 
 		totalPage = totalRecord / recordPerPage;
@@ -77,16 +77,14 @@ public class Page {
 			}
 		}
 		
+		String concat = path.contains("?") ? "&" : "?";
 		// 이전 블록으로 이동 : 1블록은 링크가 필요 없다.
-		if (page <= pagePerBlock) {
+		 if (page <= pagePerBlock) {
 			sb.append("◀&nbsp;");
 		} else {
-			if (path.contains("?")) {
-				sb.append("<a href=\""+path+"&page=" + (beginPage - 1) + "\">◀</a>&nbsp;");
-			} else {
-				sb.append("<a href=\""+path+"?page=" + (beginPage - 1) + "\">◀</a>&nbsp;");
-			}
+			sb.append("<a href=\"" + path + concat + "page=" + (beginPage - 1) + "\">◀</a>&nbsp;");
 		}
+		
 		
 		// 페이지 번호 : 현재 페이지는 링크가 필요 없다.
 		for (int i = beginPage; i <= endPage; i++) {
@@ -102,15 +100,13 @@ public class Page {
 			}
 		}
 		
-		String concat = path.contains("?") ? "&" : "?";
 		
 		// 다음 블록으로 이동 : 마지막 블록은 링크가 필요 없다. 
 		if (endPage == totalPage) {
 			sb.append("▶&nbsp;");
 		} else {
-				sb.append("<a href=\""+path + concat + "page=" + (endPage + 1) + "\">▶</a>&nbsp;");				
+			sb.append("<a href=\"" + path + concat + "page=" + (endPage + 1) + "\">▶</a>&nbsp;");
 		}
-		
 		
 		// 마지막 페이지로 이동 : 마지막 페이지는 링크가 필요 없다
 		if (page == totalPage) {

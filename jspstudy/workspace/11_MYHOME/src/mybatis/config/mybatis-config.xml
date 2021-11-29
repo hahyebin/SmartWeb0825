@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="dao/member.xml"/>   <!--  매핑을 미리 적어놓은 상태면 dao 패키지에 꼭 존재해야함 실 파일없으면 오류 -->
         <mapper resource="dao/free.xml"/>     <!--  매핑을 미리 적어놓은 상태면 dao 패키지에 꼭 존재해야함 실 파일없으면 오류 -->
         <mapper resource="dao/board.xml"/>    <!--  매핑을 미리 적어놓은 상태면 dao 패키지에 꼭 존재해야함 실 파일없으면 오류 -->
+        <mapper resource="dao/comments.xml"/>    <!--  매핑을 미리 적어놓은 상태면 dao 패키지에 꼭 존재해야함 실 파일없으면 오류 -->
 	</mappers>
 	
 </configuration>
