@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.video.repository.GalleryRepository">   
+ 
+	<!--  갤러리 목록 보기 -->
+	<select id="selectGalleryList" resultType="com.koreait.video.domain.Video">
+		SELECT NO, WRITER, TITLE, CONTENT, IP, PATH, ORIGIN, SAVED, CREATED, LASTMODIFIED 
+		  FROM Video
+	     ORDER BY NO DESC
+	</select>
+	
+	<!--  갤러리 상세보기 -->
+	<select id="selectGalleryByNo" parameterType="Long"   resultType="com.koreait.video.domain.Video" >
+		SELECT NO, WRITER, TITLE, CONTENT, IP, PATH, ORIGIN, SAVED, CREATED, LASTMODIFIED 
+		  FROM Video
+		 WHERE NO = #{no}
+	</select>
+	
+	<!-- 갤러리 등록 -->
+	<insert id="insertGallery" parameterType="com.koreait.video.domain.Video" >
+		INSERT INTO Video
+		VALUES ( Video_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{ip}, #{path}, #{origin}, #{saved}, SYSDATE, SYSDATE ) 	
+	</insert>
+	
+	<!-- 갤러리 수정 -->
+	<update id="updateGallery" parameterType="com.koreait.video.domain.Video">
+	
+	</update>
+	
+	<!--  갤러리 삭제 -->
+	<delete id="deleteGallery" parameterType="Long">
+		DELETE FROM Video WHERE NO = #{no}
+	</delete>
+	
+</mapper>
+
