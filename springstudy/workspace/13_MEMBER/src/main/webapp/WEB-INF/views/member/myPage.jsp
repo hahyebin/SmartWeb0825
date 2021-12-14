@@ -10,13 +10,36 @@
 <script>
 
 	$(document).ready(function(){
+		 fnPresentPwCheck();
 		 fnPwCheck();
 		 fnPw2Check();
+		 fnUpdatePw();
 		 fnUpdateMember();
 		 fnLeaveMember();
-		
 	});
-
+	
+	// 현재 비밀번호 확인 변수와 함수 
+	let presentPwPass = false;
+	function fnPresentPwCheck(){
+		
+		$("#pw0_btn").click(function(){
+			$.ajax({
+				url: 'presentPwCheck',
+				type: 'post',
+				data: $('#f').serialize(),
+				dataType: 'json',
+				success: function(map){
+					if (map.result) {
+						console.log(map.result);
+						presentPwPass = true;
+					} else {
+						presentPwPass = false;
+					}
+				}
+			});
+		})
+	} // end fnPresentPwCheck
+	
 	
 	// 비밀번호 변경 변수와 함수
 	let pwPass = false;
@@ -48,6 +71,24 @@
 			}
 		})  
 	} // end of fnPw2Check()
+	
+	// 비밀번호 변경 함수
+	function fnUpdatePw() {
+		$('#updatePw_btn').click(function(){
+			if ( presentPwPass == false ) {
+				alert('현재 비밀번호를 확인하세요.');
+				return;
+			}
+			else if ( pwPass == false || pwPass2 == false ) {
+				alert('새 비밀번호 입력을 확인하세요.');
+				return;
+			}
+			$('#f').attr('action', '/ex13/member/updatePw');
+			$('#f').submit();
+		});
+	}  // end fnUpdatePw
+	
+	
 	
 	
 	// 이메일 중복체크 변수와 함수 
@@ -84,49 +125,34 @@
 			}); // end of ajax
 	} // end of fnEmailCheck
 	
-	
-	
-	
-	
-	
+
 	
 	
 	// 회원정보 변경 함수
 	function fnUpdateMember(){
-		$('#updateMember_btn').click(function(){
-			
-			// 현재 비번 틀리면 변경 불가 - 복호화한거 갖고와야함..
-			if(  $("#pw0").val() != '${loginUser.pw}'	) {
-				alert('현재 비밀번호가 일치하지 않습니다,'); return;
-			}
-			
-			
+	    	fnEmailCheck();
 			// 이름이랑 이메일 변경안할때
 			if ( $("#name").val() == '${loginUser.name}'  &&  $("#email").val() == '${loginUser.email}'	) {
 				alert('변경할 내용이 없습니다.');
 				return;
 			} 
-			 fnEmailCheck();
-			
-			 
 			 if ( emailPass == false ){
 					return;
 			 }
-		    
-			 
 			$('#f').attr('action', '/ex13/member/updateMember');
 			$('#f').submit();
-		});	
-	}
+   	}
 	
+	// 회원탈퇴
 	function fnLeaveMember(){
 		$('#leave_btn').click(function(){
 			if( confirm('탈퇴하시겠습니까?') ){
-				location.href="/ex13/member/leaveMember?no="+$('#no').val();
+			//	location.href="/ex13/member/leave?no="+$('#no').val();
+			$('#f').attr('action','/ex13/member/leave');
+			$('#f').submit();
 			}
 		})
-		
-	}
+	}  // end of fnLeaveMember
 	
 	
 </script>
@@ -148,8 +174,9 @@
 	<form id="f" method="post" >
 		
 		<input type="hidden" name="no" id="no" value="${loginUser.no}">
+		<input type="hidden" name="id" id="id" value="${loginUser.id}">
 		
- 		
+ 	
 		회원번호<br>
 		${loginUser.no}<br><br>
 		
@@ -160,7 +187,8 @@
 		${loginUser.registed}<br><br>
 		
 		현재 비밀번호<br>
-		<input type="password" name="pw0" id="pw0"><br><br>
+		<input type="password" name="pw0" id="pw0">
+		<input type="button" value="현재비밀번호확인" id="pw0_btn"><br><br>
 		
 		새 비밀번호<br>
 		<input type="password" name="pw" id="pw" ><span id="pw_result"></span><br><br>

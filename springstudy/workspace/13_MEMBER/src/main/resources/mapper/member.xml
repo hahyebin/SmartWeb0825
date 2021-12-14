@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.ex13.repository.MemberRepository">   
  
-	<!-- 아이디 중복체크 -->
+	<!-- 아이디 중복체크 + 비번 수정시 아이디로 확인 -->
 	<select id="selectMemberById" parameterType="String" resultType="com.koreait.ex13.domain.Member">
 		SELECT NO, ID, PW, NAME, EMAIL, STATE, REGISTED
 		  FROM MEMBER

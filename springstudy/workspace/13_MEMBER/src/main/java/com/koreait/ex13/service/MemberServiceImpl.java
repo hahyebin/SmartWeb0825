@@ -154,15 +154,26 @@ public class MemberServiceImpl implements MemberService {
    
    // 탈퇴하기
    @Override
-	public void leaveMember(HttpServletRequest request) {
-		Long no = Long.parseLong(request.getParameter("no"));
-		MemberRepository repository = sqlSession.getMapper(MemberRepository.class);		
-	    repository.leaveMember(no);
-		
+	public void leave(Long no, HttpSession session) {
+		MemberRepository repository = sqlSession.getMapper(MemberRepository.class);
+	    int result = repository.leaveMember(no);
+	    if( result > 0  ) session.invalidate();
 	}
    
+   
+   // 비밀번호 디코딩
+	@Override
+	public Map<String, Object> presentPwCheck(HttpServletRequest request) {
+        String pw = request.getParameter("pw");
+        MemberRepository repository = sqlSession.getMapper(MemberRepository.class);
+        Member member = repository.selectMemberById(request.getParameter("id"));
+        Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", SecurityUtils.sha256(request.getParameter("pw0")).equals(member.getPw()));
+		logger.info(pw);
+		logger.info(map.toString());
+		return map;
 
-	
+	}
 
 	
 	

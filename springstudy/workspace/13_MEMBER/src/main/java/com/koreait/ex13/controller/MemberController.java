@@ -110,7 +110,7 @@ public class MemberController {
 	@PostMapping("updatePw")
 	public String updatePw(Member member) {
 		service.updatePw(member);
-		return "redirect:loginPage";
+		return "redirect:/";     // 로그인 페이지로 보내면 세션문제와 다시 로그인하는 일이 발생함
 	}
 	
 	// 마이페이지로 이동
@@ -127,24 +127,17 @@ public class MemberController {
 	}
 	
 	//탈퇴하기
-	@GetMapping("leaveMember")
-	public String leaveMember(HttpServletRequest request, HttpSession session) {
-		service.leaveMember(request);
-		 if( session.getAttribute("loginUser") != null )
-			  session.invalidate();
+	@PostMapping("leave")
+	public String leaveMember(@RequestParam Long no, HttpSession session) {
+		service.leave(no, session);
 		return  "redirect:/";
 	}
+
 	
-	// 수정시 비밀번호 확인하기
-	@PostMapping(value="pwUpdateCheck", produces = "application/json; charset=UTF-8")
+	// 비번 수정시 현재 비번과 일치여부확인하기
+	@PostMapping(value="presentPwCheck", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String pwUpdateCheck(@RequestParam String pw, Model model){
-		Member member = new Member();
-		String decoding = member.getPw();
-		decoding = SecurityUtils.decodeBase64(decoding);
-		model.addAttribute("decoding", decoding);
-		return "member/myPage";
+	public Map<String, Object> presentPwCheck(HttpServletRequest request){
+		return service.presentPwCheck(request);
 	}
-	
-	
 }

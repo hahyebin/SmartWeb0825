@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koreait.ex13.domain.Member;
 
@@ -35,8 +36,9 @@ public interface MemberService {
 	public void updateMember(Member member, HttpSession session);
 	
 	// 탈퇴하기
-	public void leaveMember(HttpServletRequest request);
+	public void leave(Long no, HttpSession session);
 	
-	
+	// 비밀번호 확인하기(디코딩)
+	public Map<String, Object> presentPwCheck(HttpServletRequest request);
 	
 }
