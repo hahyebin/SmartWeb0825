@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+
+   <!--  dbcp와 매핑 설정은 mybatisconfig에서 한다. -->
+   
+	<settings>
+		  <setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	
+	<!-- 별명주기 -> 매퍼작업시 com.koreait.ex14.domain.Department 대신 Department 사용 가능  -->
+	<typeAliases>
+		<typeAlias type="com.koreait.ex14.domain.Department" alias="Department"/>
+		<typeAlias type="com.koreait.ex14.domain.Employee" alias="Employee"/>
+	</typeAliases>
+
+</configuration>
