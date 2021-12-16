@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.integration1.repository.SearchBoardRepository">
+	
+
+	
+	<!-- 책 목록 -->
+	<select id="findAllMovie" resultType="com.koreait.integration1.domain.SearchBoard">
+		SELECT NO, TITLE, CONTENT, REGDATE
+		  FROM SearchBoard
+		 ORDER BY NO 
+	</select>
+	
+	<!--  검색된 책 -->
+	<select id="findMovie" resultType="com.koreait.integration1.domain.SearchBoard" parameterType="Map">
+		SELECT NO, TITLE, CONTENT, REGDATE
+		  FROM SearchBoard
+		 WHERE ${column} LIKE  '%' || #{query} || '%'
+	</select>
+
+
+
+</mapper>
