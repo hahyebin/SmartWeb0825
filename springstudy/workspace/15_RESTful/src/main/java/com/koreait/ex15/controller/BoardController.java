@@ -14,13 +14,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BoardController {
 
-	private BoardService service2;
+	private BoardService boardService;
 	
 	// 삽입 : boards    + POST
 	// 이미지 삽입
 	@PostMapping(value="api/boards", produces = "application/json; charset=UTF-8")
 	public Map<String, Object> addBoard(MultipartHttpServletRequest multipartRequest){
-  	  return	service2.addBoard(multipartRequest);
+  	  return	boardService.addBoard(multipartRequest);
 	}
 	
 	

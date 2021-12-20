@@ -63,6 +63,12 @@ public class RESTfulConfig {
 		return new MemberServiceImpl(sqlSession());
 	}
 	
+	@Bean
+	public BoardService boardService() throws Exception {
+		return new BoardServiceImpl(sqlSession());
+	}
+	
+	
 	// 파일 첨부 시 등록해 둬야 할 Bean
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
@@ -81,10 +87,6 @@ public class RESTfulConfig {
 	}
 	
 	
-//	@Bean
-//	public BoardAttachService service3() throws Exception{
-//		return new BoardAttachServiceImpl(sqlSession());
-//	}
-	
+
 	
 }

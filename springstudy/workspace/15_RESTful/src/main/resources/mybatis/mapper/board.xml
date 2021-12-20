@@ -7,15 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 이미지게시글 등록 -->
-	<insert id="insertBoard" parameterType="Board">
-	  <selectKey keyProperty="boardNo" order="BEFORE" resultType="Long">
-	      SELECT BOARD_SEQ.NEXTVAL
-	        FROM BOARD
-	  </selectKey>
-		INSERT INTO BOARD 
-		VALUES ( boardNo, #{title}, #{content}, #{writer}, #{ip}, SYSDATE, SYSDATE ) 
+<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="boardNo" order="BEFORE" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD
+		VALUES (#{boardNo}, #{title}, #{content}, #{writer}, #{ip}, SYSDATE, SYSDATE)
 	</insert>
-	
+
+	<insert id="insertBoardAttach" parameterType="BoardAttach">
+		INSERT INTO BOARD_ATTACH
+		VALUES (#{uuid}, #{path}, #{origin}, #{fileType}, #{boardNo})
+	</insert>
+
 
 
 
